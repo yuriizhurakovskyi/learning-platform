@@ -9,13 +9,23 @@ import java.util.Objects;
 public class Classwork {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cw_id")
     private Integer id;
-    @Column
+    @Column(name = "cw_date")
     private Date date;
-    @Column
+    @Column(name = "cw_solution")
     private String solution;
-    @Column
+    @Column(name = "cw_result")
     private String result;
+    @ManyToOne
+    @JoinColumn(name = "u_id")
+    private User teacher;
+    @ManyToOne
+    @JoinColumn(name = "u_id")
+    private User student;
+    @ManyToOne
+    @JoinColumn(name = "tsk_id")
+    private Task task;
 
     public Classwork() {
     }

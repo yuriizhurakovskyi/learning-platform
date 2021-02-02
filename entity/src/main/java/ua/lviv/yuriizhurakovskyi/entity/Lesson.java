@@ -1,17 +1,25 @@
 package ua.lviv.yuriizhurakovskyi.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "lesson")
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ls_id")
     private Integer id;
-    @Column
+    @Column(name = "ls_lecture_topic")
     private String lectureTopic;
-    @Column
+    @Column(name = "ls_description")
     private String description;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+    @OneToMany(mappedBy = "task",
+            cascade = CascadeType.ALL)
+    private Set<Task> tasks;
 
     public Lesson() {
     }

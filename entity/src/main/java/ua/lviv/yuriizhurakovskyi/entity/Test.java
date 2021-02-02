@@ -2,19 +2,26 @@ package ua.lviv.yuriizhurakovskyi.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "test")
 public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tst_id")
     private Integer id;
-    @Column
+    @Column(name = "tst_name")
     private String name;
-    @Column
+    @Column(name = "tst_count_of_question")
     private Integer countOfQuestions;
-    @Column
+    @Column(name = "tst_level")
     private Level level;
+    @ManyToOne
+    @JoinColumn(name = "u_id")
+    private User addedBy;
+    @OneToMany(mappedBy = "test_question")
+    private Set<TestQuestion> testQuestions;
 
     public Test() {
     }

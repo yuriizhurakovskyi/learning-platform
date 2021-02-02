@@ -8,11 +8,15 @@ import java.util.Objects;
 public class TestQuestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tq_id")
     private Integer id;
-    @Column
+    @Column(name = "tq_question")
     private String question;
-    @Column
+    @Column(name = "tq_answer")
     private String answer;
+    @ManyToOne
+    @JoinColumn(name = "tst_id")
+    private Test test;
 
     public TestQuestion() {
     }

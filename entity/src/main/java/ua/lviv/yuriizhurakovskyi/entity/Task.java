@@ -8,9 +8,13 @@ import java.util.Objects;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tsk_id")
     private Integer id;
-    @Column
+    @Column(name = "tsk_description")
     private String description;
+    @ManyToOne
+    @JoinColumn(name = "lesson_id")
+    private Lesson lesson;
 
     public Task() {
     }
