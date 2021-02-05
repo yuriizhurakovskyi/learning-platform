@@ -5,15 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "lesson")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Builder
-@EqualsAndHashCode
-@ToString
 public class LessonDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

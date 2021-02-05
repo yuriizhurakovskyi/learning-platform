@@ -6,15 +6,12 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Builder
-@EqualsAndHashCode
-@ToString
 public class UserDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

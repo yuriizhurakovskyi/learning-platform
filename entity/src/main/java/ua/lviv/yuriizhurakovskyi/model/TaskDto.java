@@ -4,15 +4,12 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "task")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Builder
-@EqualsAndHashCode
-@ToString
 public class TaskDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

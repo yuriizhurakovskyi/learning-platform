@@ -4,15 +4,12 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "test_question")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Builder
-@EqualsAndHashCode
-@ToString
 public class TestQuestionDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -5,15 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
+@Data
 @Entity
 @Table(name = "classwork")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Builder
-@EqualsAndHashCode
-@ToString
 public class ClassworkDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
