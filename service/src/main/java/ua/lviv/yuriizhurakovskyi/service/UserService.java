@@ -3,6 +3,7 @@ package ua.lviv.yuriizhurakovskyi.service;
 import ua.lviv.yuriizhurakovskyi.model.UserDto;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -14,7 +15,7 @@ public interface UserService {
 
     boolean existsById(Integer userId);
 
-    Iterable<UserDto> findAll();
+    List<UserDto> findAll();
 
     void deleteById(Integer userId);
 

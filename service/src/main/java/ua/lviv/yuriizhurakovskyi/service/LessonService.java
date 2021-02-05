@@ -3,6 +3,7 @@ package ua.lviv.yuriizhurakovskyi.service;
 import ua.lviv.yuriizhurakovskyi.model.LessonDto;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface LessonService{
@@ -14,7 +15,7 @@ public interface LessonService{
 
     boolean existsById(Integer lessonId);
 
-    Iterable<LessonDto> findAll();
+    List<LessonDto> findAll();
 
     void deleteById(Integer lessonId);
 

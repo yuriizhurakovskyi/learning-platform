@@ -3,6 +3,7 @@ package ua.lviv.yuriizhurakovskyi.service;
 import ua.lviv.yuriizhurakovskyi.model.TaskDto;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface TaskService{
@@ -14,7 +15,7 @@ public interface TaskService{
 
     boolean existsById(Integer testId);
 
-    Iterable<TaskDto> findAll();
+    List<TaskDto> findAll();
 
     void deleteById(Integer testId);
 

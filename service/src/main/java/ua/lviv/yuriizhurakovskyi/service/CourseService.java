@@ -3,6 +3,7 @@ package ua.lviv.yuriizhurakovskyi.service;
 import ua.lviv.yuriizhurakovskyi.model.CourseDto;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface CourseService{
@@ -14,7 +15,7 @@ public interface CourseService{
 
     boolean existsById(Integer courseId);
 
-    Iterable<CourseDto> findAll();
+    List<CourseDto> findAll();
 
     void deleteById(Integer courseId);
 

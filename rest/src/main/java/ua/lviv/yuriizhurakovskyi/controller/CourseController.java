@@ -1,13 +1,15 @@
 package ua.lviv.yuriizhurakovskyi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
 import ua.lviv.yuriizhurakovskyi.model.CourseDto;
 import ua.lviv.yuriizhurakovskyi.service.CourseService;
 
 import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
 @Validated
 @RestController
@@ -27,37 +29,50 @@ public class CourseController {
     }
 
     @GetMapping("/findById/{courseId}")
-    public Optional<CourseDto> findById(@PathVariable Integer courseId) {
-        return courseService.findById(courseId);
+    public ResponseEntity<CourseDto> findById(@PathVariable Integer courseId) {
+        CourseDto courseDto = courseService.findById(courseId)
+                .orElseThrow(() -> new DataNotFoundException("Classwork not found"));
+        return ResponseEntity.ok().body(courseDto);
     }
 
     @GetMapping("/existsById/{courseId}")
-    public boolean existsById(@PathVariable Integer courseId) {
-        return courseService.existsById(courseId);
+    public ResponseEntity<Boolean> existsById(@PathVariable Integer courseId) {
+        return ResponseEntity.ok().body(courseService.existsById(courseId));
     }
 
     @GetMapping("/findAll")
-    public Iterable<CourseDto> findAll() {
-        return courseService.findAll();
+    public ResponseEntity<List<CourseDto>> findAll() {
+        return ResponseEntity.ok(courseService.findAll());
     }
 
     @DeleteMapping("/deleteById/{courseId}")
-    public void deleteById(@PathVariable Integer courseId) {
+    public ResponseEntity<Void> deleteById(@PathVariable Integer courseId) {
+        courseService.findById(courseId)
+                .orElseThrow(() -> new DataNotFoundException("Course not found"));
         courseService.deleteById(courseId);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody CourseDto courseDto) {
+    public ResponseEntity<Void> delete(@RequestBody CourseDto courseDto) {
+        courseService.findById(courseDto.getId())
+                .orElseThrow(() -> new DataNotFoundException("Course not found"));
         courseService.delete(courseDto);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/deleteCollection")
-    public void deleteAll(Collection<CourseDto> courseDtos) {
+    public ResponseEntity<Void> deleteAll(List<CourseDto> courseDtos) {
+        courseDtos.forEach(c -> courseService
+                .findById(c.getId())
+                .orElseThrow(() -> new DataNotFoundException("Classwork not found")));
         courseService.deleteAll(courseDtos);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/deleteAll")
-    public void deleteAll() {
+    public ResponseEntity<Void> deleteAll() {
         courseService.deleteAll();
+        return ResponseEntity.ok().build();
     }
 }

@@ -7,6 +7,7 @@ import ua.lviv.yuriizhurakovskyi.repository.CourseRepository;
 import ua.lviv.yuriizhurakovskyi.service.CourseService;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Iterable<CourseDto> findAll() {
+    public List<CourseDto> findAll() {
         return courseRepository.findAll();
     }
 

@@ -1,13 +1,15 @@
 package ua.lviv.yuriizhurakovskyi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
 import ua.lviv.yuriizhurakovskyi.model.TaskDto;
 import ua.lviv.yuriizhurakovskyi.service.TaskService;
 
 import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
 @Validated
 @RestController
@@ -27,37 +29,50 @@ public class TaskController {
     }
 
     @GetMapping("/findById/{taskId}")
-    public Optional<TaskDto> findById(@PathVariable Integer taskId) {
-        return taskService.findById(taskId);
+    public ResponseEntity<TaskDto> findById(@PathVariable Integer taskId) {
+        TaskDto taskDto = taskService.findById(taskId)
+                .orElseThrow(() -> new DataNotFoundException("Task not found"));
+        return ResponseEntity.ok().body(taskDto);
     }
 
     @GetMapping("/existsById/{taskId}")
-    public boolean existsById(@PathVariable Integer taskId) {
-        return taskService.existsById(taskId);
+    public ResponseEntity<Boolean> existsById(@PathVariable Integer taskId) {
+        return ResponseEntity.ok().body(taskService.existsById(taskId));
     }
 
     @GetMapping("/findAll")
-    public Iterable<TaskDto> findAll() {
-        return taskService.findAll();
+    public ResponseEntity<List<TaskDto>> findAll() {
+        return ResponseEntity.ok(taskService.findAll());
     }
 
     @DeleteMapping("/deleteById/{taskId}")
-    public void deleteById(@PathVariable Integer taskId) {
+    public ResponseEntity<Void> deleteById(@PathVariable Integer taskId) {
+        taskService.findById(taskId)
+                .orElseThrow(() -> new DataNotFoundException("Task not found"));
         taskService.deleteById(taskId);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody TaskDto taskDto) {
+    public ResponseEntity<Void> delete(@RequestBody TaskDto taskDto) {
+        taskService.findById(taskDto.getId())
+                .orElseThrow(() -> new DataNotFoundException("Task not found"));
         taskService.delete(taskDto);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/deleteCollection")
-    public void deleteAll(Collection<TaskDto> taskDtos) {
+    public ResponseEntity<Void> deleteAll(List<TaskDto> taskDtos) {
+        taskDtos.forEach(t -> taskService
+                .findById(t.getId())
+                .orElseThrow(() -> new DataNotFoundException("Lesson not found")));
         taskService.deleteAll(taskDtos);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/deleteAll")
-    public void deleteAll() {
+    public ResponseEntity<Void> deleteAll() {
         taskService.deleteAll();
+        return ResponseEntity.ok().build();
     }
 }

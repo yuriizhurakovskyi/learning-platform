@@ -7,6 +7,7 @@ import ua.lviv.yuriizhurakovskyi.repository.TaskRepository;
 import ua.lviv.yuriizhurakovskyi.service.TaskService;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Iterable<TaskDto> findAll() {
+    public List<TaskDto> findAll() {
         return taskRepository.findAll();
     }
 

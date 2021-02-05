@@ -7,6 +7,7 @@ import ua.lviv.yuriizhurakovskyi.repository.TestQuestionRepository;
 import ua.lviv.yuriizhurakovskyi.service.TestQuestionService;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,7 @@ public class TestQuestionServiceImpl implements TestQuestionService {
     }
 
     @Override
-    public Iterable<TestQuestionDto> findAll() {
+    public List<TestQuestionDto> findAll() {
         return testQuestionRepository.findAll();
     }
 

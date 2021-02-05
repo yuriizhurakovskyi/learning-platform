@@ -7,6 +7,7 @@ import ua.lviv.yuriizhurakovskyi.repository.UserRepository;
 import ua.lviv.yuriizhurakovskyi.service.UserService;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsById(userId);
     }
 
-    public Iterable<UserDto> findAll() {
+    public List<UserDto> findAll() {
         return userRepository.findAll();
     }
 

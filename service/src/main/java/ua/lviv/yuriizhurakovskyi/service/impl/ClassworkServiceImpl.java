@@ -7,6 +7,7 @@ import ua.lviv.yuriizhurakovskyi.repository.ClassworkRepository;
 import ua.lviv.yuriizhurakovskyi.service.ClassworkService;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,7 @@ public class ClassworkServiceImpl implements ClassworkService {
     }
 
     @Override
-    public Iterable<ClassworkDto> findAll() {
+    public List<ClassworkDto> findAll() {
         return classworkRepository.findAll();
     }
 

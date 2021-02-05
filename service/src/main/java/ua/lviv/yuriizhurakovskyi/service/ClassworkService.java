@@ -3,6 +3,7 @@ package ua.lviv.yuriizhurakovskyi.service;
 import ua.lviv.yuriizhurakovskyi.model.ClassworkDto;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface ClassworkService {
@@ -14,7 +15,7 @@ public interface ClassworkService {
 
     boolean existsById(Integer classworkId);
 
-    Iterable<ClassworkDto> findAll();
+    List<ClassworkDto> findAll();
 
     void deleteById(Integer classworkId);
 

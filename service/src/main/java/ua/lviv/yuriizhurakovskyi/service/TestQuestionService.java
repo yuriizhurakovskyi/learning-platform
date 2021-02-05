@@ -3,6 +3,7 @@ package ua.lviv.yuriizhurakovskyi.service;
 import ua.lviv.yuriizhurakovskyi.model.TestQuestionDto;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface TestQuestionService {
@@ -14,7 +15,7 @@ public interface TestQuestionService {
 
     boolean existsById(Integer testQuestionId);
 
-    Iterable<TestQuestionDto> findAll();
+    List<TestQuestionDto> findAll();
 
     void deleteById(Integer testQuestionId);
 

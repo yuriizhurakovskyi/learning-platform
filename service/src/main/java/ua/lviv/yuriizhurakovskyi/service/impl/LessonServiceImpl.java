@@ -7,6 +7,7 @@ import ua.lviv.yuriizhurakovskyi.repository.LessonRepository;
 import ua.lviv.yuriizhurakovskyi.service.LessonService;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public Iterable<LessonDto> findAll() {
+    public List<LessonDto> findAll() {
         return lessonRepository.findAll();
     }
 
