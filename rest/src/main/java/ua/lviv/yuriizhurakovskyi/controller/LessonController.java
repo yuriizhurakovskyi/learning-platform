@@ -75,4 +75,16 @@ public class LessonController {
         lessonService.deleteAll();
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/update/{lessonId}")
+    public ResponseEntity<LessonDto> updateLesson(@PathVariable Integer lessonId,
+                                                  @RequestBody LessonDto lessonDto) {
+        LessonDto l = lessonService.findById(lessonId)
+                .orElseThrow(() -> new DataNotFoundException(
+                        "Lesson with id=" + lessonId + " not found exception "));
+        l.setDescription(lessonDto.getDescription());
+        l.setLectureTopic(lessonDto.getLectureTopic());
+
+        return ResponseEntity.ok(this.lessonService.save(l));
+    }
 }

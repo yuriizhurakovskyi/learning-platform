@@ -75,4 +75,19 @@ public class UserController {
         userService.deleteAll();
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/update/{userId}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable Integer userId,
+                                              @RequestBody UserDto userDto) {
+        UserDto user = userService.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException(
+                        "User with id=" + userId + " not found exception "));
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setLevel(userDto.getLevel());
+        user.setDateOfBirth(userDto.getDateOfBirth());
+        user.setRole(userDto.getRole());
+
+        return ResponseEntity.ok(this.userService.save(user));
+    }
 }

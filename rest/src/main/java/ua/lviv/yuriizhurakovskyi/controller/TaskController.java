@@ -75,4 +75,15 @@ public class TaskController {
         taskService.deleteAll();
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/update/{taskId}")
+    public ResponseEntity<TaskDto> updateTask(@PathVariable Integer taskId,
+                                              @RequestBody TaskDto taskDto) {
+        TaskDto t = taskService.findById(taskId)
+                .orElseThrow(() -> new DataNotFoundException(
+                        "Task with id=" + taskId + " not found exception "));
+        t.setDescription(taskDto.getDescription());
+
+        return ResponseEntity.ok(this.taskService.save(t));
+    }
 }

@@ -75,4 +75,14 @@ public class ClassworkController {
         classworkService.deleteAll();
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/update/{classworkId}")
+    public ResponseEntity<ClassworkDto> updateClasswork(@PathVariable Integer classworkId,
+                                                        @RequestBody ClassworkDto classworkDto) {
+        ClassworkDto c = classworkService.findById(classworkId)
+                .orElseThrow(() -> new DataNotFoundException(
+                        "Classwork with id=" + classworkId + " not found exception "));
+
+        return ResponseEntity.ok(this.classworkService.save(c));
+    }
 }

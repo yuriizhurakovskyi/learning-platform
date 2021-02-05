@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/test_question")
 @RequiredArgsConstructor
-public class TestQuestionServiceImpl {
+public class TestQuestionController {
     private final TestQuestionService testQuestionService;
 
     @PostMapping("/saveTestQuestion")
@@ -45,7 +45,7 @@ public class TestQuestionServiceImpl {
         return ResponseEntity.ok(testQuestionService.findAll());
     }
 
-    @DeleteMapping("/deleteById/{testId}")
+    @DeleteMapping("/deleteById/{testQuestionId}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer testQuestionId) {
         testQuestionService.findById(testQuestionId)
                 .orElseThrow(() -> new DataNotFoundException("Test question not found"));
@@ -74,5 +74,17 @@ public class TestQuestionServiceImpl {
     public ResponseEntity<Void> deleteAll() {
         testQuestionService.deleteAll();
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/update/{testQuestionId}")
+    public ResponseEntity<TestQuestionDto> updateTestQuestion(@PathVariable Integer testQuestionId,
+                                                      @RequestBody TestQuestionDto testQuestionDto) {
+        TestQuestionDto qd = testQuestionService.findById(testQuestionId)
+                .orElseThrow(() -> new DataNotFoundException(
+                        "Test Question with id=" + testQuestionId + " not found exception "));
+        qd.setQuestion(testQuestionDto.getQuestion());
+        qd.setAnswer(testQuestionDto.getAnswer());
+
+        return ResponseEntity.ok(this.testQuestionService.save(qd));
     }
 }

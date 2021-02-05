@@ -75,4 +75,17 @@ public class TestController {
         testService.deleteAll();
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/update/{testId}")
+    public ResponseEntity<TestDto> updateTest(@PathVariable Integer testId,
+                                              @RequestBody TestDto testDto) {
+        TestDto t = testService.findById(testId)
+                .orElseThrow(() -> new DataNotFoundException(
+                        "Test with id=" + testId + " not found exception "));
+        t.setLevel(testDto.getLevel());
+        t.setCountOfQuestions(testDto.getCountOfQuestions());
+        t.setName(testDto.getName());
+
+        return ResponseEntity.ok(this.testService.save(t));
+    }
 }

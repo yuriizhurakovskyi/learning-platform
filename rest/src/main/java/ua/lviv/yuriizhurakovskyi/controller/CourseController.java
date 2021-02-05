@@ -75,4 +75,16 @@ public class CourseController {
         courseService.deleteAll();
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/update/{courseId}")
+    public ResponseEntity<CourseDto> updateCourse(@PathVariable Integer courseId,
+                                                  @RequestBody CourseDto courseDto) {
+        CourseDto c = courseService.findById(courseId)
+                .orElseThrow(() -> new DataNotFoundException(
+                        "Course with id=" + courseId + " not found exception "));
+        c.setName(courseDto.getName());
+        c.setLevel(courseDto.getLevel());
+
+        return ResponseEntity.ok(this.courseService.save(c));
+    }
 }
