@@ -1,26 +1,26 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
-import ua.lviv.yuriizhurakovskyi.entity.Classwork;
+import ua.lviv.yuriizhurakovskyi.entity.ClassworkDto;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface ClassworkService {
-    Classwork save(Classwork classwork);
+    ClassworkDto save(ClassworkDto classworkDto);
 
-    Iterable<Classwork> saveAll(Collection<Classwork> classworks);
+    Iterable<ClassworkDto> saveAll(Collection<ClassworkDto> classworkDtos);
 
-    Optional<Classwork> findById(Integer classworkId);
+    Optional<ClassworkDto> findById(Integer classworkId);
 
     boolean existsById(Integer classworkId);
 
-    Iterable<Classwork> findAll();
+    Iterable<ClassworkDto> findAll();
 
     void deleteById(Integer classworkId);
 
-    void delete(Classwork classwork);
+    void delete(ClassworkDto classworkDto);
 
-    void deleteAll(Collection<Classwork> classworks);
+    void deleteAll(Collection<ClassworkDto> classworkDtos);
 
     void deleteAll();
 }

@@ -1,7 +1,9 @@
 package ua.lviv.yuriizhurakovskyi.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import ua.lviv.yuriizhurakovskyi.entity.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import ua.lviv.yuriizhurakovskyi.entity.TaskDto;
 
-public interface TaskRepository extends CrudRepository<Task, Integer> {
+@Repository
+public interface TaskRepository extends JpaRepository<TaskDto, Integer> {
 }

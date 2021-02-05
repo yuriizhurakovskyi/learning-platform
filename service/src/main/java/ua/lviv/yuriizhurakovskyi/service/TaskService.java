@@ -1,26 +1,26 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
-import ua.lviv.yuriizhurakovskyi.entity.Task;
+import ua.lviv.yuriizhurakovskyi.entity.TaskDto;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface TaskService{
-    Task save(Task task);
+    TaskDto save(TaskDto taskDto);
 
-    Iterable<Task> saveAll(Collection<Task> tasks);
+    Iterable<TaskDto> saveAll(Collection<TaskDto> taskDtos);
 
-    Optional<Task> findById(Integer testId);
+    Optional<TaskDto> findById(Integer testId);
 
     boolean existsById(Integer testId);
 
-    Iterable<Task> findAll();
+    Iterable<TaskDto> findAll();
 
     void deleteById(Integer testId);
 
-    void delete(Task task);
+    void delete(TaskDto taskDto);
 
-    void deleteAll(Collection<Task> testQuestions);
+    void deleteAll(Collection<TaskDto> testQuestions);
 
     void deleteAll();
 }

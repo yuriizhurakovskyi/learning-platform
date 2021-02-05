@@ -1,26 +1,26 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
-import ua.lviv.yuriizhurakovskyi.entity.Course;
+import ua.lviv.yuriizhurakovskyi.entity.CourseDto;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface CourseService{
-    Course save(Course course);
+    CourseDto save(CourseDto courseDto);
 
-    Iterable<Course> saveAll(Collection<Course> courses);
+    Iterable<CourseDto> saveAll(Collection<CourseDto> cours);
 
-    Optional<Course> findById(Integer courseId);
+    Optional<CourseDto> findById(Integer courseId);
 
     boolean existsById(Integer courseId);
 
-    Iterable<Course> findAll();
+    Iterable<CourseDto> findAll();
 
     void deleteById(Integer courseId);
 
-    void delete(Course course);
+    void delete(CourseDto courseDto);
 
-    void deleteAll(Collection<Course> courses);
+    void deleteAll(Collection<CourseDto> cours);
 
     void deleteAll();
 }

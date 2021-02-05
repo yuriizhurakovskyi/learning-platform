@@ -1,7 +1,9 @@
 package ua.lviv.yuriizhurakovskyi.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import ua.lviv.yuriizhurakovskyi.entity.Course;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import ua.lviv.yuriizhurakovskyi.entity.CourseDto;
 
-public interface CourseRepository extends CrudRepository<Course, Integer> {
+@Repository
+public interface CourseRepository extends JpaRepository<CourseDto, Integer> {
 }

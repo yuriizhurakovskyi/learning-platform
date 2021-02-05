@@ -1,26 +1,26 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
-import ua.lviv.yuriizhurakovskyi.entity.Test;
+import ua.lviv.yuriizhurakovskyi.entity.TestDto;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface TestService{
-    Test save(Test test);
+    TestDto save(TestDto testDto);
 
-    Iterable<Test> saveAll(Collection<Test> tests);
+    Iterable<TestDto> saveAll(Collection<TestDto> testDtos);
 
-    Optional<Test> findById(Integer testId);
+    Optional<TestDto> findById(Integer testId);
 
     boolean existsById(Integer testId);
 
-    Iterable<Test> findAll();
+    Iterable<TestDto> findAll();
 
     void deleteById(Integer testId);
 
-    void delete(Test test);
+    void delete(TestDto testDto);
 
-    void deleteAll(Collection<Test> tests);
+    void deleteAll(Collection<TestDto> testDtos);
 
     void deleteAll();
 }

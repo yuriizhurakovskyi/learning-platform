@@ -1,26 +1,26 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
-import ua.lviv.yuriizhurakovskyi.entity.User;
+import ua.lviv.yuriizhurakovskyi.entity.UserDto;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface UserService {
-    User save(User user);
+    UserDto save(UserDto userDto);
 
-    Iterable<User> saveAll(Collection<User> users);
+    Iterable<UserDto> saveAll(Collection<UserDto> userDtos);
 
-    Optional<User> findById(Integer userId);
+    Optional<UserDto> findById(Integer userId);
 
     boolean existsById(Integer userId);
 
-    Iterable<User> findAll();
+    Iterable<UserDto> findAll();
 
     void deleteById(Integer userId);
 
-    void delete(User user);
+    void delete(UserDto userDto);
 
-    void deleteAll(Collection<User> users);
+    void deleteAll(Collection<UserDto> userDtos);
 
     void deleteAll();
 }

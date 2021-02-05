@@ -1,7 +1,9 @@
 package ua.lviv.yuriizhurakovskyi.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import ua.lviv.yuriizhurakovskyi.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import ua.lviv.yuriizhurakovskyi.entity.UserDto;
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+@Repository
+public interface UserRepository extends JpaRepository<UserDto, Integer> {
 }
