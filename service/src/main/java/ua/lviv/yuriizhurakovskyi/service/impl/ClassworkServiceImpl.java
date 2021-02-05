@@ -2,7 +2,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.lviv.yuriizhurakovskyi.entity.ClassworkDto;
+import ua.lviv.yuriizhurakovskyi.model.ClassworkDto;
 import ua.lviv.yuriizhurakovskyi.repository.ClassworkRepository;
 import ua.lviv.yuriizhurakovskyi.service.ClassworkService;
 

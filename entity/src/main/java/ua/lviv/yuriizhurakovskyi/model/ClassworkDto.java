@@ -1,4 +1,4 @@
-package ua.lviv.yuriizhurakovskyi.entity;
+package ua.lviv.yuriizhurakovskyi.model;
 
 import lombok.*;
 
@@ -16,7 +16,7 @@ import java.util.Date;
 @ToString
 public class ClassworkDto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cw_id")
     private Integer id;
     @Column(name = "cw_date")

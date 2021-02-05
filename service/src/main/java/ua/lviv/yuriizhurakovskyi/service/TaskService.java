@@ -1,6 +1,6 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
-import ua.lviv.yuriizhurakovskyi.entity.TaskDto;
+import ua.lviv.yuriizhurakovskyi.model.TaskDto;
 
 import java.util.Collection;
 import java.util.Optional;

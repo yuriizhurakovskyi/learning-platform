@@ -3,7 +3,7 @@ package ua.lviv.yuriizhurakovskyi.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ua.lviv.yuriizhurakovskyi.entity.TestQuestionDto;
+import ua.lviv.yuriizhurakovskyi.model.TestQuestionDto;
 import ua.lviv.yuriizhurakovskyi.service.TestQuestionService;
 
 import java.util.Collection;

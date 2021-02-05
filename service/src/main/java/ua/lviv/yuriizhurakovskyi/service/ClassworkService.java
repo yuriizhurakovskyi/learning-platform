@@ -1,6 +1,6 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
-import ua.lviv.yuriizhurakovskyi.entity.ClassworkDto;
+import ua.lviv.yuriizhurakovskyi.model.ClassworkDto;
 
 import java.util.Collection;
 import java.util.Optional;

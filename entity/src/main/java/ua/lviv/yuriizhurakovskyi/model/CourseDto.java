@@ -1,4 +1,4 @@
-package ua.lviv.yuriizhurakovskyi.entity;
+package ua.lviv.yuriizhurakovskyi.model;
 
 import lombok.*;
 
@@ -16,7 +16,7 @@ import java.util.Set;
 @ToString
 public class CourseDto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cs_id")
     private Integer id;
     @Column(name = "cs_name")

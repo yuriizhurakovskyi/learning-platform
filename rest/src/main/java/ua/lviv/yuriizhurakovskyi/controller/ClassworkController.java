@@ -3,7 +3,7 @@ package ua.lviv.yuriizhurakovskyi.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ua.lviv.yuriizhurakovskyi.entity.ClassworkDto;
+import ua.lviv.yuriizhurakovskyi.model.ClassworkDto;
 import ua.lviv.yuriizhurakovskyi.service.ClassworkService;
 
 import java.util.Collection;

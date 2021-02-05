@@ -2,7 +2,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.lviv.yuriizhurakovskyi.entity.TaskDto;
+import ua.lviv.yuriizhurakovskyi.model.TaskDto;
 import ua.lviv.yuriizhurakovskyi.repository.TaskRepository;
 import ua.lviv.yuriizhurakovskyi.service.TaskService;
 

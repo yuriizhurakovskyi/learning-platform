@@ -1,6 +1,6 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
-import ua.lviv.yuriizhurakovskyi.entity.TestDto;
+import ua.lviv.yuriizhurakovskyi.model.TestDto;
 
 import java.util.Collection;
 import java.util.Optional;

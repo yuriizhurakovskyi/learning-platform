@@ -2,7 +2,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.lviv.yuriizhurakovskyi.entity.TestQuestionDto;
+import ua.lviv.yuriizhurakovskyi.model.TestQuestionDto;
 import ua.lviv.yuriizhurakovskyi.repository.TestQuestionRepository;
 import ua.lviv.yuriizhurakovskyi.service.TestQuestionService;
 

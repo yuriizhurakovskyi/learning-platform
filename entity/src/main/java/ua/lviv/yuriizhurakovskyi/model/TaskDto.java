@@ -1,4 +1,4 @@
-package ua.lviv.yuriizhurakovskyi.entity;
+package ua.lviv.yuriizhurakovskyi.model;
 
 import lombok.*;
 
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @ToString
 public class TaskDto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "tsk_id")
     private Integer id;
     @Column(name = "tsk_description")

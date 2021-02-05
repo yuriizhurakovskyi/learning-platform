@@ -1,4 +1,4 @@
-package ua.lviv.yuriizhurakovskyi.entity;
+package ua.lviv.yuriizhurakovskyi.model;
 
 import lombok.*;
 
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @ToString
 public class TestQuestionDto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "tq_id")
     private Integer id;
     @Column(name = "tq_question")
