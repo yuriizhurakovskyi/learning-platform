@@ -2,52 +2,65 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.lviv.yuriizhurakovskyi.model.UserDto;
+import ua.lviv.yuriizhurakovskyi.entity.User;
+import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
 import ua.lviv.yuriizhurakovskyi.repository.UserRepository;
 import ua.lviv.yuriizhurakovskyi.service.UserService;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
-    public UserDto save(UserDto userDto) {
-        return userRepository.save(userDto);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
-    public Iterable<UserDto> saveAll(Collection<UserDto> userDtos) {
-        return userRepository.saveAll(userDtos);
+    public Iterable<User> saveAll(Collection<User> users) {
+        return userRepository.saveAll(users);
     }
 
-    public Optional<UserDto> findById(Integer userId) {
-        return userRepository.findById(userId);
+    public User findById(Integer userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException( "User with id=" + userId + " not found exception "));
     }
 
     public boolean existsById(Integer userId) {
         return userRepository.existsById(userId);
     }
 
-    public List<UserDto> findAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 
     public void deleteById(Integer userId) {
+        this.findById(userId);
         userRepository.deleteById(userId);
     }
 
-    public void delete(UserDto userDto) {
-        userRepository.delete(userDto);
+    public void delete(User user) {
+        userRepository.delete(user);
     }
 
-    public void deleteAll(Collection<UserDto> userDtos) {
-        userRepository.deleteAll(userDtos);
+    public void deleteAll(Collection<User> users) {
+        userRepository.deleteAll(users);
     }
 
     public void deleteAll() {
         userRepository.deleteAll();
+    }
+
+    public User update(User user) {
+        Integer userId = user.getId();
+        User u = this.findById(userId);
+        u.setFirstName(user.getFirstName());
+        u.setLastName(user.getLastName());
+        u.setLevel(user.getLevel());
+        u.setDateOfBirth(user.getDateOfBirth());
+        u.setRole(user.getRole());
+        return this.save(u);
     }
 }

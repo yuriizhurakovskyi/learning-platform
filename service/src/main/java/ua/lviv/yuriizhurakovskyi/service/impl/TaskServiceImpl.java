@@ -2,7 +2,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.lviv.yuriizhurakovskyi.model.TaskDto;
+import ua.lviv.yuriizhurakovskyi.entity.Task;
 import ua.lviv.yuriizhurakovskyi.repository.TaskRepository;
 import ua.lviv.yuriizhurakovskyi.service.TaskService;
 
@@ -16,17 +16,17 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
 
     @Override
-    public TaskDto save(TaskDto taskDto) {
-        return taskRepository.save(taskDto);
+    public Task save(Task task) {
+        return taskRepository.save(task);
     }
 
     @Override
-    public Iterable<TaskDto> saveAll(Collection<TaskDto> taskDtos) {
-        return taskRepository.saveAll(taskDtos);
+    public Iterable<Task> saveAll(Collection<Task> tasks) {
+        return taskRepository.saveAll(tasks);
     }
 
     @Override
-    public Optional<TaskDto> findById(Integer taskId) {
+    public Optional<Task> findById(Integer taskId) {
         return taskRepository.findById(taskId);
     }
 
@@ -36,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskDto> findAll() {
+    public List<Task> findAll() {
         return taskRepository.findAll();
     }
 
@@ -46,13 +46,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void delete(TaskDto taskDto) {
-        taskRepository.delete(taskDto);
+    public void delete(Task task) {
+        taskRepository.delete(task);
     }
 
     @Override
-    public void deleteAll(Collection<TaskDto> taskDtos) {
-        taskRepository.deleteAll(taskDtos);
+    public void deleteAll(Collection<Task> tasks) {
+        taskRepository.deleteAll(tasks);
     }
 
     @Override

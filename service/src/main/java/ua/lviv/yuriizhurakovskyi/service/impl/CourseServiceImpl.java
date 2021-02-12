@@ -2,7 +2,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.lviv.yuriizhurakovskyi.model.CourseDto;
+import ua.lviv.yuriizhurakovskyi.entity.Course;
 import ua.lviv.yuriizhurakovskyi.repository.CourseRepository;
 import ua.lviv.yuriizhurakovskyi.service.CourseService;
 
@@ -16,17 +16,17 @@ public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
 
     @Override
-    public CourseDto save(CourseDto courseDto) {
-        return courseRepository.save(courseDto);
+    public Course save(Course course) {
+        return courseRepository.save(course);
     }
 
     @Override
-    public Iterable<CourseDto> saveAll(Collection<CourseDto> cours) {
+    public Iterable<Course> saveAll(Collection<Course> cours) {
         return courseRepository.saveAll(cours);
     }
 
     @Override
-    public Optional<CourseDto> findById(Integer courseId) {
+    public Optional<Course> findById(Integer courseId) {
         return courseRepository.findById(courseId);
     }
 
@@ -36,7 +36,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseDto> findAll() {
+    public List<Course> findAll() {
         return courseRepository.findAll();
     }
 
@@ -46,12 +46,12 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void delete(CourseDto courseDto) {
-        courseRepository.delete(courseDto);
+    public void delete(Course course) {
+        courseRepository.delete(course);
     }
 
     @Override
-    public void deleteAll(Collection<CourseDto> cours) {
+    public void deleteAll(Collection<Course> cours) {
         courseRepository.deleteAll(cours);
     }
 

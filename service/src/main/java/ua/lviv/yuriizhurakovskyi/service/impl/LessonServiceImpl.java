@@ -2,7 +2,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.lviv.yuriizhurakovskyi.model.LessonDto;
+import ua.lviv.yuriizhurakovskyi.entity.Lesson;
 import ua.lviv.yuriizhurakovskyi.repository.LessonRepository;
 import ua.lviv.yuriizhurakovskyi.service.LessonService;
 
@@ -16,17 +16,17 @@ public class LessonServiceImpl implements LessonService {
     private final LessonRepository lessonRepository;
 
     @Override
-    public LessonDto save(LessonDto lessonDto) {
-        return lessonRepository.save(lessonDto);
+    public Lesson save(Lesson lesson) {
+        return lessonRepository.save(lesson);
     }
 
     @Override
-    public Iterable<LessonDto> saveAll(Collection<LessonDto> lessonDtos) {
-        return lessonRepository.saveAll(lessonDtos);
+    public Iterable<Lesson> saveAll(Collection<Lesson> lessons) {
+        return lessonRepository.saveAll(lessons);
     }
 
     @Override
-    public Optional<LessonDto> findById(Integer lessonId) {
+    public Optional<Lesson> findById(Integer lessonId) {
         return lessonRepository.findById(lessonId);
     }
 
@@ -36,7 +36,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public List<LessonDto> findAll() {
+    public List<Lesson> findAll() {
         return lessonRepository.findAll();
     }
 
@@ -46,13 +46,13 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public void delete(LessonDto lessonDto) {
-        lessonRepository.delete(lessonDto);
+    public void delete(Lesson lesson) {
+        lessonRepository.delete(lesson);
     }
 
     @Override
-    public void deleteAll(Collection<LessonDto> lessonDtos) {
-        lessonRepository.deleteAll(lessonDtos);
+    public void deleteAll(Collection<Lesson> lessons) {
+        lessonRepository.deleteAll(lessons);
     }
 
     @Override

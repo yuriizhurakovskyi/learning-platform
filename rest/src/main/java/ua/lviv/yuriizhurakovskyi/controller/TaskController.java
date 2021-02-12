@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
-import ua.lviv.yuriizhurakovskyi.model.TaskDto;
+import ua.lviv.yuriizhurakovskyi.entity.Task;
 import ua.lviv.yuriizhurakovskyi.service.TaskService;
 
 import java.util.Collection;
@@ -19,20 +19,20 @@ public class TaskController {
     private final TaskService taskService;
 
     @PostMapping("/saveTask")
-    public TaskDto save(TaskDto taskDto) {
-        return taskService.save(taskDto);
+    public Task save(Task task) {
+        return taskService.save(task);
     }
 
     @PostMapping("/saveTasks")
-    public Iterable<TaskDto> saveAll(Collection<TaskDto> taskDtos) {
-        return taskService.saveAll(taskDtos);
+    public Iterable<Task> saveAll(Collection<Task> tasks) {
+        return taskService.saveAll(tasks);
     }
 
     @GetMapping("/findById/{taskId}")
-    public ResponseEntity<TaskDto> findById(@PathVariable Integer taskId) {
-        TaskDto taskDto = taskService.findById(taskId)
+    public ResponseEntity<Task> findById(@PathVariable Integer taskId) {
+        Task task = taskService.findById(taskId)
                 .orElseThrow(() -> new DataNotFoundException("Task not found"));
-        return ResponseEntity.ok().body(taskDto);
+        return ResponseEntity.ok().body(task);
     }
 
     @GetMapping("/existsById/{taskId}")
@@ -41,7 +41,7 @@ public class TaskController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<TaskDto>> findAll() {
+    public ResponseEntity<List<Task>> findAll() {
         return ResponseEntity.ok(taskService.findAll());
     }
 
@@ -54,19 +54,19 @@ public class TaskController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> delete(@RequestBody TaskDto taskDto) {
-        taskService.findById(taskDto.getId())
+    public ResponseEntity<Void> delete(@RequestBody Task task) {
+        taskService.findById(task.getId())
                 .orElseThrow(() -> new DataNotFoundException("Task not found"));
-        taskService.delete(taskDto);
+        taskService.delete(task);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/deleteCollection")
-    public ResponseEntity<Void> deleteAll(List<TaskDto> taskDtos) {
-        taskDtos.forEach(t -> taskService
+    public ResponseEntity<Void> deleteAll(List<Task> tasks) {
+        tasks.forEach(t -> taskService
                 .findById(t.getId())
                 .orElseThrow(() -> new DataNotFoundException("Lesson not found")));
-        taskService.deleteAll(taskDtos);
+        taskService.deleteAll(tasks);
         return ResponseEntity.ok().build();
     }
 
@@ -77,12 +77,12 @@ public class TaskController {
     }
 
     @PutMapping("/update/{taskId}")
-    public ResponseEntity<TaskDto> updateTask(@PathVariable Integer taskId,
-                                              @RequestBody TaskDto taskDto) {
-        TaskDto t = taskService.findById(taskId)
+    public ResponseEntity<Task> updateTask(@PathVariable Integer taskId,
+                                           @RequestBody Task task) {
+        Task t = taskService.findById(taskId)
                 .orElseThrow(() -> new DataNotFoundException(
                         "Task with id=" + taskId + " not found exception "));
-        t.setDescription(taskDto.getDescription());
+        t.setDescription(task.getDescription());
 
         return ResponseEntity.ok(this.taskService.save(t));
     }

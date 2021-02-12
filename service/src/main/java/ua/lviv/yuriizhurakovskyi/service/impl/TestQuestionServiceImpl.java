@@ -2,7 +2,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.lviv.yuriizhurakovskyi.model.TestQuestionDto;
+import ua.lviv.yuriizhurakovskyi.entity.TestQuestion;
 import ua.lviv.yuriizhurakovskyi.repository.TestQuestionRepository;
 import ua.lviv.yuriizhurakovskyi.service.TestQuestionService;
 
@@ -16,17 +16,17 @@ public class TestQuestionServiceImpl implements TestQuestionService {
     private final TestQuestionRepository testQuestionRepository;
 
     @Override
-    public TestQuestionDto save(TestQuestionDto testQuestionDto) {
-        return testQuestionRepository.save(testQuestionDto);
+    public TestQuestion save(TestQuestion testQuestion) {
+        return testQuestionRepository.save(testQuestion);
     }
 
     @Override
-    public Iterable<TestQuestionDto> saveAll(Collection<TestQuestionDto> testQuestionDtos) {
-        return testQuestionRepository.saveAll(testQuestionDtos);
+    public Iterable<TestQuestion> saveAll(Collection<TestQuestion> testQuestions) {
+        return testQuestionRepository.saveAll(testQuestions);
     }
 
     @Override
-    public Optional<TestQuestionDto> findById(Integer testQuestionId) {
+    public Optional<TestQuestion> findById(Integer testQuestionId) {
         return testQuestionRepository.findById(testQuestionId);
     }
 
@@ -36,7 +36,7 @@ public class TestQuestionServiceImpl implements TestQuestionService {
     }
 
     @Override
-    public List<TestQuestionDto> findAll() {
+    public List<TestQuestion> findAll() {
         return testQuestionRepository.findAll();
     }
 
@@ -46,13 +46,13 @@ public class TestQuestionServiceImpl implements TestQuestionService {
     }
 
     @Override
-    public void delete(TestQuestionDto testQuestionDto) {
-        testQuestionRepository.delete(testQuestionDto);
+    public void delete(TestQuestion testQuestion) {
+        testQuestionRepository.delete(testQuestion);
     }
 
     @Override
-    public void deleteAll(Collection<TestQuestionDto> testQuestionDtos) {
-        testQuestionRepository.deleteAll(testQuestionDtos);
+    public void deleteAll(Collection<TestQuestion> testQuestions) {
+        testQuestionRepository.deleteAll(testQuestions);
     }
 
     @Override

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
-import ua.lviv.yuriizhurakovskyi.model.TestDto;
+import ua.lviv.yuriizhurakovskyi.entity.Test;
 import ua.lviv.yuriizhurakovskyi.service.TestService;
 
 import java.util.Collection;
@@ -19,20 +19,20 @@ public class TestController {
     private final TestService testService;
 
     @PostMapping("/saveTest")
-    public TestDto save(TestDto testDto) {
-        return testService.save(testDto);
+    public Test save(Test test) {
+        return testService.save(test);
     }
 
     @PostMapping("/saveTests")
-    public Iterable<TestDto> saveAll(Collection<TestDto> testDtos) {
-        return testService.saveAll(testDtos);
+    public Iterable<Test> saveAll(Collection<Test> tests) {
+        return testService.saveAll(tests);
     }
 
     @GetMapping("/findById/{testId}")
-    public ResponseEntity<TestDto> findById(@PathVariable Integer testId) {
-        TestDto testDto = testService.findById(testId)
+    public ResponseEntity<Test> findById(@PathVariable Integer testId) {
+        Test test = testService.findById(testId)
                 .orElseThrow(() -> new DataNotFoundException("Test not found"));
-        return ResponseEntity.ok().body(testDto);
+        return ResponseEntity.ok().body(test);
     }
 
     @GetMapping("/existsById/{testId}")
@@ -41,7 +41,7 @@ public class TestController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<TestDto>> findAll() {
+    public ResponseEntity<List<Test>> findAll() {
         return ResponseEntity.ok(testService.findAll());
     }
 
@@ -54,19 +54,19 @@ public class TestController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> delete(@RequestBody TestDto testDto) {
-        testService.findById(testDto.getId())
+    public ResponseEntity<Void> delete(@RequestBody Test test) {
+        testService.findById(test.getId())
                 .orElseThrow(() -> new DataNotFoundException("Test not found"));
-        testService.delete(testDto);
+        testService.delete(test);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/deleteCollection")
-    public ResponseEntity<Void> deleteAll(List<TestDto> testDtos) {
-        testDtos.forEach(t -> testService
+    public ResponseEntity<Void> deleteAll(List<Test> tests) {
+        tests.forEach(t -> testService
                 .findById(t.getId())
                 .orElseThrow(() -> new DataNotFoundException("Test not found")));
-        testService.deleteAll(testDtos);
+        testService.deleteAll(tests);
         return ResponseEntity.ok().build();
     }
 
@@ -77,14 +77,14 @@ public class TestController {
     }
 
     @PutMapping("/update/{testId}")
-    public ResponseEntity<TestDto> updateTest(@PathVariable Integer testId,
-                                              @RequestBody TestDto testDto) {
-        TestDto t = testService.findById(testId)
+    public ResponseEntity<Test> updateTest(@PathVariable Integer testId,
+                                           @RequestBody Test test) {
+        Test t = testService.findById(testId)
                 .orElseThrow(() -> new DataNotFoundException(
                         "Test with id=" + testId + " not found exception "));
-        t.setLevel(testDto.getLevel());
-        t.setCountOfQuestions(testDto.getCountOfQuestions());
-        t.setName(testDto.getName());
+     //   t.setLevel(test.getLevel());
+     //   t.setCountOfQuestions(test.getCountOfQuestions());
+        t.setName(test.getName());
 
         return ResponseEntity.ok(this.testService.save(t));
     }

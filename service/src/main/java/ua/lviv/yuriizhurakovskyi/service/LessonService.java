@@ -1,27 +1,27 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
-import ua.lviv.yuriizhurakovskyi.model.LessonDto;
+import ua.lviv.yuriizhurakovskyi.entity.Lesson;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 public interface LessonService{
-    LessonDto save(LessonDto lessonDto);
+    Lesson save(Lesson lesson);
 
-    Iterable<LessonDto> saveAll(Collection<LessonDto> lessonDtos);
+    Iterable<Lesson> saveAll(Collection<Lesson> lessons);
 
-    Optional<LessonDto> findById(Integer lessonId);
+    Optional<Lesson> findById(Integer lessonId);
 
     boolean existsById(Integer lessonId);
 
-    List<LessonDto> findAll();
+    List<Lesson> findAll();
 
     void deleteById(Integer lessonId);
 
-    void delete(LessonDto lessonDto);
+    void delete(Lesson lesson);
 
-    void deleteAll(Collection<LessonDto> lessonDtos);
+    void deleteAll(Collection<Lesson> lessons);
 
     void deleteAll();
 }

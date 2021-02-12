@@ -2,7 +2,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.lviv.yuriizhurakovskyi.model.ClassworkDto;
+import ua.lviv.yuriizhurakovskyi.entity.Classwork;
 import ua.lviv.yuriizhurakovskyi.repository.ClassworkRepository;
 import ua.lviv.yuriizhurakovskyi.service.ClassworkService;
 
@@ -16,17 +16,17 @@ public class ClassworkServiceImpl implements ClassworkService {
     private final ClassworkRepository classworkRepository;
 
     @Override
-    public ClassworkDto save(ClassworkDto classworkDto) {
-        return classworkRepository.save(classworkDto);
+    public Classwork save(Classwork classwork) {
+        return classworkRepository.save(classwork);
     }
 
     @Override
-    public Iterable<ClassworkDto> saveAll(Collection<ClassworkDto> classworkDtos) {
-        return classworkRepository.saveAll(classworkDtos);
+    public Iterable<Classwork> saveAll(Collection<Classwork> classworks) {
+        return classworkRepository.saveAll(classworks);
     }
 
     @Override
-    public Optional<ClassworkDto> findById(Integer classworkId) {
+    public Optional<Classwork> findById(Integer classworkId) {
         return classworkRepository.findById(classworkId);
     }
 
@@ -36,7 +36,7 @@ public class ClassworkServiceImpl implements ClassworkService {
     }
 
     @Override
-    public List<ClassworkDto> findAll() {
+    public List<Classwork> findAll() {
         return classworkRepository.findAll();
     }
 
@@ -46,13 +46,13 @@ public class ClassworkServiceImpl implements ClassworkService {
     }
 
     @Override
-    public void delete(ClassworkDto classworkDto) {
-        classworkRepository.delete(classworkDto);
+    public void delete(Classwork classwork) {
+        classworkRepository.delete(classwork);
     }
 
     @Override
-    public void deleteAll(Collection<ClassworkDto> classworkDtos) {
-        classworkRepository.deleteAll(classworkDtos);
+    public void deleteAll(Collection<Classwork> classworks) {
+        classworkRepository.deleteAll(classworks);
     }
 
     @Override

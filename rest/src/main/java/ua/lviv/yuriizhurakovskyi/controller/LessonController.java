@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
-import ua.lviv.yuriizhurakovskyi.model.LessonDto;
+import ua.lviv.yuriizhurakovskyi.entity.Lesson;
 import ua.lviv.yuriizhurakovskyi.service.LessonService;
 
 import java.util.Collection;
@@ -19,20 +19,20 @@ public class LessonController {
     private final LessonService lessonService;
 
     @PostMapping("/saveLesson")
-    public LessonDto save(LessonDto lessonDto) {
-        return lessonService.save(lessonDto);
+    public Lesson save(Lesson lesson) {
+        return lessonService.save(lesson);
     }
 
     @PostMapping("/saveLessons")
-    public Iterable<LessonDto> saveAll(Collection<LessonDto> lessonDtos) {
-        return lessonService.saveAll(lessonDtos);
+    public Iterable<Lesson> saveAll(Collection<Lesson> lessons) {
+        return lessonService.saveAll(lessons);
     }
 
     @GetMapping("/findById/{lessonId}")
-    public ResponseEntity<LessonDto> findById(@PathVariable Integer lessonId) {
-        LessonDto lessonDto = lessonService.findById(lessonId)
+    public ResponseEntity<Lesson> findById(@PathVariable Integer lessonId) {
+        Lesson lesson = lessonService.findById(lessonId)
                 .orElseThrow(() -> new DataNotFoundException("Lesson not found"));
-        return ResponseEntity.ok().body(lessonDto);
+        return ResponseEntity.ok().body(lesson);
     }
 
     @GetMapping("/existsById/{lessonId}")
@@ -41,7 +41,7 @@ public class LessonController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<LessonDto>> findAll() {
+    public ResponseEntity<List<Lesson>> findAll() {
         return ResponseEntity.ok(lessonService.findAll());
     }
 
@@ -54,19 +54,19 @@ public class LessonController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> delete(@RequestBody LessonDto lessonDto) {
-        lessonService.findById(lessonDto.getId())
+    public ResponseEntity<Void> delete(@RequestBody Lesson lesson) {
+        lessonService.findById(lesson.getId())
                 .orElseThrow(() -> new DataNotFoundException("Lesson not found"));
-        lessonService.delete(lessonDto);
+        lessonService.delete(lesson);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/deleteCollection")
-    public ResponseEntity<Void> deleteAll(List<LessonDto> lessonDtos) {
-        lessonDtos.forEach(l -> lessonService
+    public ResponseEntity<Void> deleteAll(List<Lesson> lessons) {
+        lessons.forEach(l -> lessonService
                 .findById(l.getId())
                 .orElseThrow(() -> new DataNotFoundException("Lesson not found")));
-        lessonService.deleteAll(lessonDtos);
+        lessonService.deleteAll(lessons);
         return ResponseEntity.ok().build();
     }
 
@@ -77,13 +77,13 @@ public class LessonController {
     }
 
     @PutMapping("/update/{lessonId}")
-    public ResponseEntity<LessonDto> updateLesson(@PathVariable Integer lessonId,
-                                                  @RequestBody LessonDto lessonDto) {
-        LessonDto l = lessonService.findById(lessonId)
+    public ResponseEntity<Lesson> updateLesson(@PathVariable Integer lessonId,
+                                               @RequestBody Lesson lesson) {
+        Lesson l = lessonService.findById(lessonId)
                 .orElseThrow(() -> new DataNotFoundException(
                         "Lesson with id=" + lessonId + " not found exception "));
-        l.setDescription(lessonDto.getDescription());
-        l.setLectureTopic(lessonDto.getLectureTopic());
+        l.setDescription(lesson.getDescription());
+        l.setLectureTopic(lesson.getLectureTopic());
 
         return ResponseEntity.ok(this.lessonService.save(l));
     }

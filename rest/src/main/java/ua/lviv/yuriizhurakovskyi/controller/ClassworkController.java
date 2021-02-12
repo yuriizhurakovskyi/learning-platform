@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
-import ua.lviv.yuriizhurakovskyi.model.ClassworkDto;
+import ua.lviv.yuriizhurakovskyi.entity.Classwork;
 import ua.lviv.yuriizhurakovskyi.service.ClassworkService;
 
 import java.util.Collection;
@@ -19,20 +19,20 @@ public class ClassworkController {
     private final ClassworkService classworkService;
 
     @PostMapping("/saveClasswork")
-    public ClassworkDto save(ClassworkDto classworkDto) {
-        return classworkService.save(classworkDto);
+    public Classwork save(@RequestBody Classwork classwork) {
+        return classworkService.save(classwork);
     }
 
     @PostMapping("/saveClassworks")
-    public Iterable<ClassworkDto> saveAll(Collection<ClassworkDto> classworkDtos) {
-        return classworkService.saveAll(classworkDtos);
+    public Iterable<Classwork> saveAll(Collection<Classwork> classworks) {
+        return classworkService.saveAll(classworks);
     }
 
     @GetMapping("/findById/{classworkId}")
-    public ResponseEntity<ClassworkDto> findById(@PathVariable Integer classworkId) {
-        ClassworkDto classworkDto = classworkService.findById(classworkId)
+    public ResponseEntity<Classwork> findById(@PathVariable Integer classworkId) {
+        Classwork classwork = classworkService.findById(classworkId)
                 .orElseThrow(() -> new DataNotFoundException("Classwork not found"));
-        return ResponseEntity.ok().body(classworkDto);
+        return ResponseEntity.ok().body(classwork);
     }
 
     @GetMapping("/existsById/{classworkId}")
@@ -41,7 +41,7 @@ public class ClassworkController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<ClassworkDto>> findAll() {
+    public ResponseEntity<List<Classwork>> findAll() {
         return ResponseEntity.ok(classworkService.findAll());
     }
 
@@ -54,19 +54,19 @@ public class ClassworkController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> delete(@RequestBody ClassworkDto classworkDto) {
-        classworkService.findById(classworkDto.getId())
+    public ResponseEntity<Void> delete(@RequestBody Classwork classwork) {
+        classworkService.findById(classwork.getId())
                 .orElseThrow(() -> new DataNotFoundException("Classwork not found"));
-        classworkService.delete(classworkDto);
+        classworkService.delete(classwork);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/deleteCollection")
-    public ResponseEntity<Void> deleteAll(List<ClassworkDto> classworkDtos) {
-        classworkDtos.forEach(cwd -> classworkService
+    public ResponseEntity<Void> deleteAll(List<Classwork> classworks) {
+        classworks.forEach(cwd -> classworkService
                 .findById(cwd.getId())
                 .orElseThrow(() -> new DataNotFoundException("Classwork not found")));
-        classworkService.deleteAll(classworkDtos);
+        classworkService.deleteAll(classworks);
         return ResponseEntity.ok().build();
     }
 
@@ -77,9 +77,9 @@ public class ClassworkController {
     }
 
     @PutMapping("/update/{classworkId}")
-    public ResponseEntity<ClassworkDto> updateClasswork(@PathVariable Integer classworkId,
-                                                        @RequestBody ClassworkDto classworkDto) {
-        ClassworkDto c = classworkService.findById(classworkId)
+    public ResponseEntity<Classwork> updateClasswork(@PathVariable Integer classworkId,
+                                                     @RequestBody Classwork classwork) {
+        Classwork c = classworkService.findById(classworkId)
                 .orElseThrow(() -> new DataNotFoundException(
                         "Classwork with id=" + classworkId + " not found exception "));
 

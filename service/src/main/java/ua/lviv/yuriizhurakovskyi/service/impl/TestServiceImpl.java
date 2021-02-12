@@ -2,7 +2,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.lviv.yuriizhurakovskyi.model.TestDto;
+import ua.lviv.yuriizhurakovskyi.entity.Test;
 import ua.lviv.yuriizhurakovskyi.repository.TestRepository;
 import ua.lviv.yuriizhurakovskyi.service.TestService;
 
@@ -16,17 +16,17 @@ public class TestServiceImpl implements TestService {
     private final TestRepository testRepository;
 
     @Override
-    public TestDto save(TestDto testDto) {
-        return testRepository.save(testDto);
+    public Test save(Test test) {
+        return testRepository.save(test);
     }
 
     @Override
-    public Iterable<TestDto> saveAll(Collection<TestDto> users) {
+    public Iterable<Test> saveAll(Collection<Test> users) {
         return testRepository.saveAll(users);
     }
 
     @Override
-    public Optional<TestDto> findById(Integer testId) {
+    public Optional<Test> findById(Integer testId) {
         return testRepository.findById(testId);
     }
 
@@ -36,7 +36,7 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public List<TestDto> findAll() {
+    public List<Test> findAll() {
         return testRepository.findAll();
     }
 
@@ -46,13 +46,13 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public void delete(TestDto testDto) {
-        testRepository.delete(testDto);
+    public void delete(Test test) {
+        testRepository.delete(test);
     }
 
     @Override
-    public void deleteAll(Collection<TestDto> testDtos) {
-        testRepository.deleteAll(testDtos);
+    public void deleteAll(Collection<Test> tests) {
+        testRepository.deleteAll(tests);
     }
 
     @Override
