@@ -3,6 +3,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.lviv.yuriizhurakovskyi.entity.Lesson;
+import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
 import ua.lviv.yuriizhurakovskyi.repository.LessonRepository;
 import ua.lviv.yuriizhurakovskyi.service.LessonService;
 
@@ -21,18 +22,9 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public Iterable<Lesson> saveAll(Collection<Lesson> lessons) {
-        return lessonRepository.saveAll(lessons);
-    }
-
-    @Override
-    public Optional<Lesson> findById(Integer lessonId) {
-        return lessonRepository.findById(lessonId);
-    }
-
-    @Override
-    public boolean existsById(Integer lessonId) {
-        return lessonRepository.existsById(lessonId);
+    public Lesson findById(Integer lessonId) {
+        return lessonRepository.findById(lessonId)
+                .orElseThrow(() -> new DataNotFoundException("Lesson with id=" + lessonId + " not found exception "));
     }
 
     @Override
@@ -42,21 +34,16 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public void deleteById(Integer lessonId) {
+        this.findById(lessonId);
         lessonRepository.deleteById(lessonId);
     }
 
     @Override
-    public void delete(Lesson lesson) {
-        lessonRepository.delete(lesson);
-    }
-
-    @Override
-    public void deleteAll(Collection<Lesson> lessons) {
-        lessonRepository.deleteAll(lessons);
-    }
-
-    @Override
-    public void deleteAll() {
-        lessonRepository.deleteAll();
+    public Lesson update(Lesson lesson) {
+        Integer lessonId = lesson.getId();
+        Lesson l = this.findById(lessonId);
+        l.setDescription(lesson.getDescription());
+        l.setLectureTopic(lesson.getLectureTopic());
+        return lessonRepository.save(l);
     }
 }

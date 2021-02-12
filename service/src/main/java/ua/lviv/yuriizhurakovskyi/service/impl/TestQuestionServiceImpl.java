@@ -3,12 +3,11 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.lviv.yuriizhurakovskyi.entity.TestQuestion;
+import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
 import ua.lviv.yuriizhurakovskyi.repository.TestQuestionRepository;
 import ua.lviv.yuriizhurakovskyi.service.TestQuestionService;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,18 +20,9 @@ public class TestQuestionServiceImpl implements TestQuestionService {
     }
 
     @Override
-    public Iterable<TestQuestion> saveAll(Collection<TestQuestion> testQuestions) {
-        return testQuestionRepository.saveAll(testQuestions);
-    }
-
-    @Override
-    public Optional<TestQuestion> findById(Integer testQuestionId) {
-        return testQuestionRepository.findById(testQuestionId);
-    }
-
-    @Override
-    public boolean existsById(Integer testQuestionId) {
-        return testQuestionRepository.existsById(testQuestionId);
+    public TestQuestion findById(Integer testQuestionId) {
+        return testQuestionRepository.findById(testQuestionId)
+                .orElseThrow(() -> new DataNotFoundException("Test Question with id=" + testQuestionId + " not found exception"));
     }
 
     @Override
@@ -42,21 +32,17 @@ public class TestQuestionServiceImpl implements TestQuestionService {
 
     @Override
     public void deleteById(Integer testQuestionId) {
+        this.findById(testQuestionId);
         testQuestionRepository.deleteById(testQuestionId);
     }
 
     @Override
-    public void delete(TestQuestion testQuestion) {
-        testQuestionRepository.delete(testQuestion);
+    public TestQuestion update(TestQuestion testQuestion) {
+        Integer testQuestionId = testQuestion.getId();
+        TestQuestion qd = this.findById(testQuestionId);
+        qd.setQuestion(testQuestion.getQuestion());
+        qd.setAnswer(testQuestion.getAnswer());
+        return testQuestionRepository.save(qd);
     }
 
-    @Override
-    public void deleteAll(Collection<TestQuestion> testQuestions) {
-        testQuestionRepository.deleteAll(testQuestions);
-    }
-
-    @Override
-    public void deleteAll() {
-        testQuestionRepository.deleteAll();
-    }
 }

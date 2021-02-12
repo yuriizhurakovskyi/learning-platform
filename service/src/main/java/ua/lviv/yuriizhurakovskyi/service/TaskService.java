@@ -9,19 +9,11 @@ import java.util.Optional;
 public interface TaskService{
     Task save(Task task);
 
-    Iterable<Task> saveAll(Collection<Task> tasks);
-
-    Optional<Task> findById(Integer testId);
-
-    boolean existsById(Integer testId);
+    Task findById(Integer testId);
 
     List<Task> findAll();
 
     void deleteById(Integer testId);
 
-    void delete(Task task);
-
-    void deleteAll(Collection<Task> testQuestions);
-
-    void deleteAll();
+    Task update(Task task);
 }

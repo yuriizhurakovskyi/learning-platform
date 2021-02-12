@@ -3,12 +3,11 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.lviv.yuriizhurakovskyi.entity.Classwork;
+import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
 import ua.lviv.yuriizhurakovskyi.repository.ClassworkRepository;
 import ua.lviv.yuriizhurakovskyi.service.ClassworkService;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,18 +20,9 @@ public class ClassworkServiceImpl implements ClassworkService {
     }
 
     @Override
-    public Iterable<Classwork> saveAll(Collection<Classwork> classworks) {
-        return classworkRepository.saveAll(classworks);
-    }
-
-    @Override
-    public Optional<Classwork> findById(Integer classworkId) {
-        return classworkRepository.findById(classworkId);
-    }
-
-    @Override
-    public boolean existsById(Integer classworkId) {
-        return classworkRepository.existsById(classworkId);
+    public Classwork findById(Integer classworkId) {
+        return classworkRepository.findById(classworkId)
+                .orElseThrow(() -> new DataNotFoundException("Classwork with id=" + classworkId + " not found exception "));
     }
 
     @Override
@@ -42,21 +32,20 @@ public class ClassworkServiceImpl implements ClassworkService {
 
     @Override
     public void deleteById(Integer classworkId) {
+        this.findById(classworkId);
         classworkRepository.deleteById(classworkId);
     }
 
     @Override
-    public void delete(Classwork classwork) {
-        classworkRepository.delete(classwork);
-    }
-
-    @Override
-    public void deleteAll(Collection<Classwork> classworks) {
-        classworkRepository.deleteAll(classworks);
-    }
-
-    @Override
-    public void deleteAll() {
-        classworkRepository.deleteAll();
+    public Classwork update(Classwork classwork) {
+        Integer classworkId = classwork.getId();
+        Classwork c = this.findById(classworkId);
+        c.setDate(classwork.getDate());
+        c.setTask(classwork.getTask());
+        c.setResult(classwork.getResult());
+        c.setSolution(classwork.getSolution());
+        c.setStudent(classwork.getStudent());
+        c.setTeacher(classwork.getTeacher());
+        return classworkRepository.save(c);
     }
 }

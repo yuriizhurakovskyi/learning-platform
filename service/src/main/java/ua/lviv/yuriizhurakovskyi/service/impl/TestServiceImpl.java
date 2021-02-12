@@ -3,12 +3,11 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.lviv.yuriizhurakovskyi.entity.Test;
+import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
 import ua.lviv.yuriizhurakovskyi.repository.TestRepository;
 import ua.lviv.yuriizhurakovskyi.service.TestService;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,18 +20,9 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public Iterable<Test> saveAll(Collection<Test> users) {
-        return testRepository.saveAll(users);
-    }
-
-    @Override
-    public Optional<Test> findById(Integer testId) {
-        return testRepository.findById(testId);
-    }
-
-    @Override
-    public boolean existsById(Integer testId) {
-        return testRepository.existsById(testId);
+    public Test findById(Integer testId) {
+        return testRepository.findById(testId)
+                .orElseThrow(() -> new DataNotFoundException("Test with id=" + testId + " not found exception "));
     }
 
     @Override
@@ -42,21 +32,18 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public void deleteById(Integer testId) {
+        this.findById(testId);
         testRepository.deleteById(testId);
     }
 
     @Override
-    public void delete(Test test) {
-        testRepository.delete(test);
+    public Test update(Test test) {
+        Integer testId = test.getId();
+        Test t = this.findById(testId);
+        //   t.setLevel(test.getLevel());
+        //   t.setCountOfQuestions(test.getCountOfQuestions());
+        t.setName(test.getName());
+        return testRepository.save(t);
     }
 
-    @Override
-    public void deleteAll(Collection<Test> tests) {
-        testRepository.deleteAll(tests);
-    }
-
-    @Override
-    public void deleteAll() {
-        testRepository.deleteAll();
-    }
 }

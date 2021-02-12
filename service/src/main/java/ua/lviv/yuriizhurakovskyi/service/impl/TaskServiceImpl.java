@@ -3,6 +3,7 @@ package ua.lviv.yuriizhurakovskyi.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.lviv.yuriizhurakovskyi.entity.Task;
+import ua.lviv.yuriizhurakovskyi.exception.DataNotFoundException;
 import ua.lviv.yuriizhurakovskyi.repository.TaskRepository;
 import ua.lviv.yuriizhurakovskyi.service.TaskService;
 
@@ -21,18 +22,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Iterable<Task> saveAll(Collection<Task> tasks) {
-        return taskRepository.saveAll(tasks);
-    }
-
-    @Override
-    public Optional<Task> findById(Integer taskId) {
-        return taskRepository.findById(taskId);
-    }
-
-    @Override
-    public boolean existsById(Integer taskId) {
-        return taskRepository.existsById(taskId);
+    public Task findById(Integer taskId) {
+        return taskRepository.findById(taskId)
+                .orElseThrow(() -> new DataNotFoundException("Task with id=" + taskId + " not found exception "));
     }
 
     @Override
@@ -42,21 +34,15 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteById(Integer taskId) {
+        this.findById(taskId);
         taskRepository.deleteById(taskId);
     }
 
     @Override
-    public void delete(Task task) {
-        taskRepository.delete(task);
-    }
-
-    @Override
-    public void deleteAll(Collection<Task> tasks) {
-        taskRepository.deleteAll(tasks);
-    }
-
-    @Override
-    public void deleteAll() {
-        taskRepository.deleteAll();
+    public Task update(Task task) {
+        Integer taskId = task.getId();
+        Task t = this.findById(taskId);
+        t.setDescription(task.getDescription());
+        return taskRepository.save(t);
     }
 }
