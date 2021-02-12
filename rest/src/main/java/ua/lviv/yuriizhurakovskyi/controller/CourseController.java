@@ -1,9 +1,12 @@
 package ua.lviv.yuriizhurakovskyi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ua.lviv.yuriizhurakovskyi.dto.course.CourseDtoRequest;
+import ua.lviv.yuriizhurakovskyi.dto.course.CourseDtoResponse;
 import ua.lviv.yuriizhurakovskyi.entity.Course;
 import ua.lviv.yuriizhurakovskyi.service.CourseService;
 
@@ -17,28 +20,28 @@ public class CourseController {
     private final CourseService courseService;
 
     @PostMapping("/")
-    public Course save(Course course) {
-        return courseService.save(course);
+    public ResponseEntity<CourseDtoResponse> save(@RequestBody CourseDtoRequest courseDtoRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(courseService.save(courseDtoRequest));
     }
 
     @GetMapping("/{courseId}")
-    public ResponseEntity<Course> findById(@PathVariable Integer courseId) {
+    public ResponseEntity<CourseDtoResponse> findById(@PathVariable Long courseId) {
         return ResponseEntity.ok().body(courseService.findById(courseId));
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Course>> findAll() {
+    public ResponseEntity<List<CourseDtoResponse>> findAll() {
         return ResponseEntity.ok(courseService.findAll());
     }
 
     @DeleteMapping("/{courseId}")
-    public ResponseEntity<Void> deleteById(@PathVariable Integer courseId) {
+    public ResponseEntity<Void> deleteById(@PathVariable Long courseId) {
         courseService.deleteById(courseId);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/")
-    public ResponseEntity<Course> updateCourse(@RequestBody Course course) {
-        return ResponseEntity.ok(this.courseService.update(course));
+    public ResponseEntity<CourseDtoResponse> updateCourse(@RequestBody CourseDtoRequest courseDtoRequest) {
+        return ResponseEntity.ok(this.courseService.update(courseDtoRequest));
     }
 }

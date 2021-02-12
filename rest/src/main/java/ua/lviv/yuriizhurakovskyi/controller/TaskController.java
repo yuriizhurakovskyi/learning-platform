@@ -1,9 +1,12 @@
 package ua.lviv.yuriizhurakovskyi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ua.lviv.yuriizhurakovskyi.dto.task.TaskDtoRequest;
+import ua.lviv.yuriizhurakovskyi.dto.task.TaskDtoResponse;
 import ua.lviv.yuriizhurakovskyi.entity.Task;
 import ua.lviv.yuriizhurakovskyi.service.TaskService;
 
@@ -17,28 +20,28 @@ public class TaskController {
     private final TaskService taskService;
 
     @PostMapping("/")
-    public Task save(Task task) {
-        return taskService.save(task);
+    public ResponseEntity<TaskDtoResponse> save(@RequestBody TaskDtoRequest taskDtoRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(taskService.save(taskDtoRequest));
     }
 
     @GetMapping("/{taskId}")
-    public ResponseEntity<Task> findById(@PathVariable Integer taskId) {
+    public ResponseEntity<TaskDtoResponse> findById(@PathVariable Long taskId) {
         return ResponseEntity.ok().body(taskService.findById(taskId));
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Task>> findAll() {
+    public ResponseEntity<List<TaskDtoResponse>> findAll() {
         return ResponseEntity.ok(taskService.findAll());
     }
 
     @DeleteMapping("/{taskId}")
-    public ResponseEntity<Void> deleteById(@PathVariable Integer taskId) {
+    public ResponseEntity<Void> deleteById(@PathVariable Long taskId) {
         taskService.deleteById(taskId);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/")
-    public ResponseEntity<Task> updateTask(@RequestBody Task task) {
-        return ResponseEntity.ok(this.taskService.update(task));
+    public ResponseEntity<TaskDtoResponse> updateTask(@RequestBody TaskDtoRequest taskDtoRequest) {
+        return ResponseEntity.ok(this.taskService.update(taskDtoRequest));
     }
 }

@@ -1,5 +1,7 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
+import ua.lviv.yuriizhurakovskyi.dto.test.TestDtoRequest;
+import ua.lviv.yuriizhurakovskyi.dto.test.TestDtoResponse;
 import ua.lviv.yuriizhurakovskyi.entity.Test;
 
 import java.util.Collection;
@@ -7,13 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TestService {
-    Test save(Test test);
+    TestDtoResponse save(TestDtoRequest testDtoRequest);
 
-    Test findById(Integer testId);
+    TestDtoResponse findById(Long testId);
 
-    List<Test> findAll();
+    List<TestDtoResponse> findAll();
 
-    void deleteById(Integer testId);
+    void deleteById(Long testId);
 
-    Test update(Test test);
+    TestDtoResponse update(TestDtoRequest testDtoRequest);
 }

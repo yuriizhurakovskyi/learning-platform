@@ -1,5 +1,7 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
+import ua.lviv.yuriizhurakovskyi.dto.course.CourseDtoRequest;
+import ua.lviv.yuriizhurakovskyi.dto.course.CourseDtoResponse;
 import ua.lviv.yuriizhurakovskyi.entity.Course;
 
 import java.util.Collection;
@@ -7,13 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CourseService {
-    Course save(Course course);
+    CourseDtoResponse save(CourseDtoRequest courseDtoRequest);
 
-    Course findById(Integer courseId);
+    CourseDtoResponse findById(Long courseId);
 
-    List<Course> findAll();
+    List<CourseDtoResponse> findAll();
 
-    void deleteById(Integer courseId);
+    void deleteById(Long courseId);
 
-    Course update(Course course);
+    CourseDtoResponse update(CourseDtoRequest courseDtoRequest);
 }

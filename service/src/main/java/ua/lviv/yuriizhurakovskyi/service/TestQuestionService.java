@@ -1,17 +1,18 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
-import ua.lviv.yuriizhurakovskyi.entity.TestQuestion;
+import ua.lviv.yuriizhurakovskyi.dto.test_question.TestQuestionDtoRequest;
+import ua.lviv.yuriizhurakovskyi.dto.test_question.TestQuestionDtoResponse;
 
 import java.util.List;
 
 public interface TestQuestionService {
-    TestQuestion save(TestQuestion testQuestion);
+    TestQuestionDtoResponse save(TestQuestionDtoRequest testQuestionDtoRequest);
 
-    TestQuestion findById(Integer testQuestionId);
+    TestQuestionDtoResponse findById(Long testQuestionId);
 
-    List<TestQuestion> findAll();
+    List<TestQuestionDtoResponse> findAll();
 
-    void deleteById(Integer testQuestionId);
+    void deleteById(Long testQuestionId);
 
-    TestQuestion update(TestQuestion testQuestion);
+    TestQuestionDtoResponse update(TestQuestionDtoRequest testQuestionDtoRequest);
 }

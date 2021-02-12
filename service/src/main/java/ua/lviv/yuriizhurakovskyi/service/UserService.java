@@ -1,18 +1,19 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
+import ua.lviv.yuriizhurakovskyi.dto.user.UserDtoRequest;
+import ua.lviv.yuriizhurakovskyi.dto.user.UserDtoResponse;
 import ua.lviv.yuriizhurakovskyi.entity.User;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface UserService {
-    User save(User user);
+    UserDtoResponse save(UserDtoRequest userDtoRequest);
 
-    User findById(Integer userId);
+    UserDtoResponse findById(Long userId);
 
-    List<User> findAll();
+    List<UserDtoResponse> findAll();
 
-    void deleteById(Integer userId);
+    void deleteById(Long userId);
 
-    User update(User user);
+    UserDtoResponse update(UserDtoRequest userDtoRequest);
 }

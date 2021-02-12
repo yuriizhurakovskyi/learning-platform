@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ua.lviv.yuriizhurakovskyi.entity.Lesson;
 
 @Repository
-public interface LessonRepository extends JpaRepository<Lesson, Integer> {
+public interface LessonRepository extends JpaRepository<Lesson, Long> {
 }

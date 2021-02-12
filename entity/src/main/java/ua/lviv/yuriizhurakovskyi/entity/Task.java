@@ -17,7 +17,7 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tsk_id")
-    private Integer id;
+    private Long id;
     @Column(name = "tsk_description")
     private String description;
     @ManyToOne(fetch = FetchType.LAZY)

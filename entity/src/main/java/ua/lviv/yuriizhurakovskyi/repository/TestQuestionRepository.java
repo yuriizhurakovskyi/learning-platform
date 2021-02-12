@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ua.lviv.yuriizhurakovskyi.entity.TestQuestion;
 
 @Repository
-public interface TestQuestionRepository extends JpaRepository<TestQuestion, Integer> {
+public interface TestQuestionRepository extends JpaRepository<TestQuestion, Long> {
 }

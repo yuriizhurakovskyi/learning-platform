@@ -17,7 +17,7 @@ public class TestQuestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tq_id")
-    private Integer id;
+    private Long id;
     @Column(name = "tq_question")
     private String question;
     @Column(name = "tq_answer")

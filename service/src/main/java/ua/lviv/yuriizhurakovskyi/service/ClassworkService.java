@@ -1,5 +1,7 @@
 package ua.lviv.yuriizhurakovskyi.service;
 
+import ua.lviv.yuriizhurakovskyi.dto.classwork.ClassworkDtoRequest;
+import ua.lviv.yuriizhurakovskyi.dto.classwork.ClassworkDtoResponse;
 import ua.lviv.yuriizhurakovskyi.entity.Classwork;
 
 import java.util.Collection;
@@ -7,13 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ClassworkService {
-    Classwork save(Classwork classwork);
+    ClassworkDtoResponse save(ClassworkDtoRequest classworkDtoRequest);
 
-    Classwork findById(Integer classworkId);
+    ClassworkDtoResponse findById(Long classworkId);
 
-    List<Classwork> findAll();
+    List<ClassworkDtoResponse> findAll();
 
-    void deleteById(Integer classworkId);
+    void deleteById(Long classworkId);
 
-    Classwork update(Classwork classwork);
+    ClassworkDtoResponse update(ClassworkDtoRequest classworkDtoRequest);
 }

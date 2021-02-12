@@ -1,9 +1,12 @@
 package ua.lviv.yuriizhurakovskyi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ua.lviv.yuriizhurakovskyi.dto.test_question.TestQuestionDtoRequest;
+import ua.lviv.yuriizhurakovskyi.dto.test_question.TestQuestionDtoResponse;
 import ua.lviv.yuriizhurakovskyi.entity.TestQuestion;
 import ua.lviv.yuriizhurakovskyi.service.TestQuestionService;
 
@@ -17,28 +20,28 @@ public class TestQuestionController {
     private final TestQuestionService testQuestionService;
 
     @PostMapping("/")
-    public TestQuestion save(@RequestBody TestQuestion testQuestion) {
-        return testQuestionService.save(testQuestion);
+    public ResponseEntity<TestQuestionDtoResponse> save(@RequestBody TestQuestionDtoRequest testQuestionDtoRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(testQuestionService.save(testQuestionDtoRequest));
     }
 
     @GetMapping("/{testQuestionId}")
-    public ResponseEntity<TestQuestion> findById(@PathVariable Integer testQuestionId) {
+    public ResponseEntity<TestQuestionDtoResponse> findById(@PathVariable Long testQuestionId) {
         return ResponseEntity.ok().body(testQuestionService.findById(testQuestionId));
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<TestQuestion>> findAll() {
+    public ResponseEntity<List<TestQuestionDtoResponse>> findAll() {
         return ResponseEntity.ok(testQuestionService.findAll());
     }
 
     @DeleteMapping("/{testQuestionId}")
-    public ResponseEntity<Void> deleteById(@PathVariable Integer testQuestionId) {
+    public ResponseEntity<Void> deleteById(@PathVariable Long testQuestionId) {
         testQuestionService.deleteById(testQuestionId);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/")
-    public ResponseEntity<TestQuestion> updateTestQuestion(@RequestBody TestQuestion testQuestion) {
-        return ResponseEntity.ok(this.testQuestionService.update(testQuestion));
+    public ResponseEntity<TestQuestionDtoResponse> updateTestQuestion(@RequestBody TestQuestionDtoRequest testQuestionDtoRequest) {
+        return ResponseEntity.ok(this.testQuestionService.update(testQuestionDtoRequest));
     }
 }

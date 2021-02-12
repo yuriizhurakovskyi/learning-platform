@@ -18,7 +18,7 @@ public class Classwork {
     @Id
     @Column(name = "cw_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column(name = "cw_date")
     private LocalDateTime date;
     @Column(name = "cw_solution")
