@@ -1,6 +1,8 @@
 package ua.lviv.yuriizhurakovskyi.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.lviv.yuriizhurakovskyi.dto.user.UserDtoRequest;
 import ua.lviv.yuriizhurakovskyi.dto.user.UserDtoResponse;
@@ -12,6 +14,7 @@ import ua.lviv.yuriizhurakovskyi.repository.UserRepository;
 import ua.lviv.yuriizhurakovskyi.service.UserService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,5 +58,10 @@ public class UserServiceImpl implements UserService {
         u.setRole(user.getRole());
         u = userRepository.save(u);
         return userDtoResponseMapper.map(u);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return userRepository.findByEmail(email).orElseThrow(NoSuchElementException::new);
     }
 }
