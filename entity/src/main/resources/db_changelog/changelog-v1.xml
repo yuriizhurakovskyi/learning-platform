@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd ">
+
+    <changeSet id="1185214997195-1" author="yurii1">
+        <createTable tableName="users">
+            <column name="u_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="u_firstname" type="varchar(180)"/>
+            <column name="u_lastname" type="varchar(180)"/>
+            <column name="u_level" type="varchar(5)"/>
+            <column name="u_date_of_birth" type="timestamp"/>
+            <column name="u_role" type="varchar(20)"/>
+            <column name="u_email" type="varchar(100)"/>
+            <column name="account_non_expired" type="boolean" defaultValue="true"/>
+            <column name="account_non_locked" type="boolean" defaultValue="true"/>
+            <column name="credentials_non_expired" type="boolean" defaultValue="true"/>
+            <column name="enabled" type="boolean" defaultValue="true"/>
+            <column name="u_password" type="varchar(500)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1185214997195-2" author="yurii1">
+        <createTable tableName="course">
+            <column name="cs_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="cs_name" type="varchar(180)"/>
+            <column name="cs_level" type="varchar(5)"/>
+            <column name="cs_added_by" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="course"
+                                 baseColumnNames="cs_added_by"
+                                 constraintName="fk_course_cs_added_by"
+                                 referencedTableName="users"
+                                 referencedColumnNames="u_id"/>
+    </changeSet>
+    <changeSet id="1185214997195-3" author="yurii1">
+        <createTable tableName="lesson">
+            <column name="ls_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ls_lecture_topic" type="varchar(480)"/>
+            <column name="ls_description" type="varchar(500)"/>
+            <column name="ls_course_id" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="lesson"
+                                 baseColumnNames="ls_course_id"
+                                 constraintName="fk_lesson_course"
+                                 referencedTableName="course"
+                                 referencedColumnNames="cs_id"/>
+    </changeSet>
+    <changeSet id="1185214997195-4" author="yurii1">
+        <createTable tableName="task">
+            <column name="tsk_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tsk_description" type="varchar(500)"/>
+            <column name="tsk_lesson_id" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="task"
+                                 baseColumnNames="tsk_lesson_id"
+                                 constraintName="fk_task_lesson"
+                                 referencedTableName="lesson"
+                                 referencedColumnNames="ls_id"/>
+    </changeSet>
+    <changeSet id="1185214997195-5" author="yurii1">
+        <createTable tableName="test">
+            <column name="tst_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tst_name" type="varchar(180)"/>
+            <column name="tst_added_by" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="test"
+                                 baseColumnNames="tst_added_by"
+                                 constraintName="fk_test_tst_added_by"
+                                 referencedTableName="users"
+                                 referencedColumnNames="u_id"/>
+    </changeSet>
+    <changeSet id="1185214997195-6" author="yurii1">
+        <createTable tableName="test_question">
+            <column name="tq_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tq_question" type="varchar(180)"/>
+            <column name="tq_answer" type="varchar(180)"/>
+            <column name="tq_test_id" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="test_question"
+                                 baseColumnNames="tq_test_id"
+                                 constraintName="fk_test_question_test"
+                                 referencedTableName="test"
+                                 referencedColumnNames="tst_id"/>
+    </changeSet>
+    <changeSet id="1185214997195-7" author="yurii1">
+        <createTable tableName="classwork">
+            <column name="cw_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="cw_date" type="timestamp"/>
+            <column name="cw_solution" type="varchar(500)"/>
+            <column name="cw_result" type="varchar(500)"/>
+            <column name="cw_task" type="bigint"/>
+            <column name="cw_teacher" type="bigint"/>
+            <column name="cw_student" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="classwork"
+                                 baseColumnNames="cw_task"
+                                 constraintName="fk_classwork_task"
+                                 referencedTableName="task"
+                                 referencedColumnNames="tsk_id"/>
+        <addForeignKeyConstraint baseTableName="classwork"
+                                 baseColumnNames="cw_teacher"
+                                 constraintName="fk_classwork_teacher"
+                                 referencedTableName="users"
+                                 referencedColumnNames="u_id"/>
+        <addForeignKeyConstraint baseTableName="classwork"
+                                 baseColumnNames="cw_student"
+                                 constraintName="fk_classwork_student"
+                                 referencedTableName="users"
+                                 referencedColumnNames="u_id"/>
+    </changeSet>
+</databaseChangeLog>
