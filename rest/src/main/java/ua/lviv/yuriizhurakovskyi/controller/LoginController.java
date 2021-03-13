@@ -1,6 +1,7 @@
 package ua.lviv.yuriizhurakovskyi.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @PostMapping("/login")
-    public ResponseEntity<String> login() {
+    public ResponseEntity<String> login(HttpServletRequest request) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         return ResponseEntity.ok().body("Welcome!");
     }
 
