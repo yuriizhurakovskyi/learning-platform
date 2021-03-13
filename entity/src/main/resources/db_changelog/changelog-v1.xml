@@ -41,64 +41,64 @@
                                  referencedTableName="users"
                                  referencedColumnNames="u_id"/>
     </changeSet>
-    <changeSet id="1185214997195-3" author="yurii1">
-        <createTable tableName="lesson">
-            <column name="ls_id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="ls_lecture_topic" type="varchar(480)"/>
-            <column name="ls_description" type="varchar(500)"/>
-            <column name="ls_course_id" type="bigint"/>
-        </createTable>
-        <addForeignKeyConstraint baseTableName="lesson"
-                                 baseColumnNames="ls_course_id"
-                                 constraintName="fk_lesson_course"
-                                 referencedTableName="course"
-                                 referencedColumnNames="cs_id"/>
-    </changeSet>
-    <changeSet id="1185214997195-4" author="yurii1">
-        <createTable tableName="task">
-            <column name="tsk_id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="tsk_description" type="varchar(500)"/>
-            <column name="tsk_lesson_id" type="bigint"/>
-        </createTable>
-        <addForeignKeyConstraint baseTableName="task"
-                                 baseColumnNames="tsk_lesson_id"
-                                 constraintName="fk_task_lesson"
-                                 referencedTableName="lesson"
-                                 referencedColumnNames="ls_id"/>
-    </changeSet>
-    <changeSet id="1185214997195-5" author="yurii1">
-        <createTable tableName="test">
-            <column name="tst_id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="tst_name" type="varchar(180)"/>
-            <column name="tst_added_by" type="bigint"/>
-        </createTable>
-        <addForeignKeyConstraint baseTableName="test"
-                                 baseColumnNames="tst_added_by"
-                                 constraintName="fk_test_tst_added_by"
-                                 referencedTableName="users"
-                                 referencedColumnNames="u_id"/>
-    </changeSet>
-    <changeSet id="1185214997195-6" author="yurii1">
-        <createTable tableName="test_question">
-            <column name="tq_id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="tq_question" type="varchar(180)"/>
-            <column name="tq_answer" type="varchar(180)"/>
-            <column name="tq_test_id" type="bigint"/>
-        </createTable>
-        <addForeignKeyConstraint baseTableName="test_question"
-                                 baseColumnNames="tq_test_id"
-                                 constraintName="fk_test_question_test"
-                                 referencedTableName="test"
-                                 referencedColumnNames="tst_id"/>
-    </changeSet>
+<!--    <changeSet id="1185214997195-3" author="yurii1">-->
+<!--        <createTable tableName="lesson">-->
+<!--            <column name="ls_id" type="bigint" autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="ls_lecture_topic" type="varchar(480)"/>-->
+<!--            <column name="ls_description" type="varchar(500)"/>-->
+<!--            <column name="ls_course_id" type="bigint"/>-->
+<!--        </createTable>-->
+<!--        <addForeignKeyConstraint baseTableName="lesson"-->
+<!--                                 baseColumnNames="ls_course_id"-->
+<!--                                 constraintName="fk_lesson_course"-->
+<!--                                 referencedTableName="course"-->
+<!--                                 referencedColumnNames="cs_id"/>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="1185214997195-4" author="yurii1">-->
+<!--        <createTable tableName="task">-->
+<!--            <column name="tsk_id" type="bigint" autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="tsk_description" type="varchar(500)"/>-->
+<!--            <column name="tsk_lesson_id" type="bigint"/>-->
+<!--        </createTable>-->
+<!--        <addForeignKeyConstraint baseTableName="task"-->
+<!--                                 baseColumnNames="tsk_lesson_id"-->
+<!--                                 constraintName="fk_task_lesson"-->
+<!--                                 referencedTableName="lesson"-->
+<!--                                 referencedColumnNames="ls_id"/>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="1185214997195-5" author="yurii1">-->
+<!--        <createTable tableName="test">-->
+<!--            <column name="tst_id" type="bigint" autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="tst_name" type="varchar(180)"/>-->
+<!--            <column name="tst_added_by" type="bigint"/>-->
+<!--        </createTable>-->
+<!--        <addForeignKeyConstraint baseTableName="test"-->
+<!--                                 baseColumnNames="tst_added_by"-->
+<!--                                 constraintName="fk_test_tst_added_by"-->
+<!--                                 referencedTableName="users"-->
+<!--                                 referencedColumnNames="u_id"/>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="1185214997195-6" author="yurii1">-->
+<!--        <createTable tableName="test_question">-->
+<!--            <column name="tq_id" type="bigint" autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="tq_question" type="varchar(180)"/>-->
+<!--            <column name="tq_answer" type="varchar(180)"/>-->
+<!--            <column name="tq_test_id" type="bigint"/>-->
+<!--        </createTable>-->
+<!--        <addForeignKeyConstraint baseTableName="test_question"-->
+<!--                                 baseColumnNames="tq_test_id"-->
+<!--                                 constraintName="fk_test_question_test"-->
+<!--                                 referencedTableName="test"-->
+<!--                                 referencedColumnNames="tst_id"/>-->
+<!--    </changeSet>-->
     <changeSet id="1185214997195-7" author="yurii1">
         <createTable tableName="classwork">
             <column name="cw_id" type="bigint" autoIncrement="true">
