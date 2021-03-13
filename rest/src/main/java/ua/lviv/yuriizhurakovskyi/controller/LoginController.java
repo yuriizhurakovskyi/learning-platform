@@ -12,11 +12,11 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class LoginController {
 
-//    @PostMapping("/login")
-//    public ResponseEntity<String> login() {
-//        return ResponseEntity.ok().body("Welcome!");
-//    }
-//
+    @PostMapping("/login")
+    public ResponseEntity<String> login() {
+        return ResponseEntity.ok().body("Welcome!");
+    }
+
     @GetMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
