@@ -7,5 +7,77 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd ">
-    <include file="db_changelog/changelog-v1.xml"/>
+<!--    <include file="db_changelog/changelog-v1.xml"/>-->
+    <changeSet author="Yurii" id="1">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="changelog-v1-sql/create_tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+    <changeSet author="Yurii" id="2">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="changelog-v1-sql/fill_users.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+<!--    <changeSet author="Yurii" id="3">-->
+<!--        <sqlFile dbms="postgresql"-->
+<!--                 encoding="utf8"-->
+<!--                 endDelimiter=";"-->
+<!--                 path="changelog-v1-sql/fill_course.sql"-->
+<!--                 relativeToChangelogFile="true"-->
+<!--                 splitStatements="true"-->
+<!--                 stripComments="true"/>-->
+<!--    </changeSet>-->
+<!--    <changeSet author="Yurii" id="4">-->
+<!--        <sqlFile dbms="postgresql"-->
+<!--                 encoding="utf8"-->
+<!--                 endDelimiter=";"-->
+<!--                 path="changelog-v1-sql/fill_test.sql"-->
+<!--                 relativeToChangelogFile="true"-->
+<!--                 splitStatements="true"-->
+<!--                 stripComments="true"/>-->
+<!--    </changeSet>-->
+<!--    <changeSet author="Yurii" id="5">-->
+<!--        <sqlFile dbms="postgresql"-->
+<!--                 encoding="utf8"-->
+<!--                 endDelimiter=";"-->
+<!--                 path="changelog-v1-sql/fill_lesson.sql"-->
+<!--                 relativeToChangelogFile="true"-->
+<!--                 splitStatements="true"-->
+<!--                 stripComments="true"/>-->
+<!--    </changeSet>-->
+<!--    <changeSet author="Yurii" id="6">-->
+<!--        <sqlFile dbms="postgresql"-->
+<!--                 encoding="utf8"-->
+<!--                 endDelimiter=";"-->
+<!--                 path="changelog-v1-sql/fill_test_question.sql"-->
+<!--                 relativeToChangelogFile="true"-->
+<!--                 splitStatements="true"-->
+<!--                 stripComments="true"/>-->
+<!--    </changeSet>-->
+<!--    <changeSet author="Yurii" id="7">-->
+<!--        <sqlFile dbms="postgresql"-->
+<!--                 encoding="utf8"-->
+<!--                 endDelimiter=";"-->
+<!--                 path="changelog-v1-sql/fill_task.sql"-->
+<!--                 relativeToChangelogFile="true"-->
+<!--                 splitStatements="true"-->
+<!--                 stripComments="true"/>-->
+<!--    </changeSet>-->
+<!--    <changeSet author="Yurii" id="8">-->
+<!--        <sqlFile dbms="postgresql"-->
+<!--                 encoding="utf8"-->
+<!--                 endDelimiter=";"-->
+<!--                 path="changelog-v1-sql/fill_classwork.sql"-->
+<!--                 relativeToChangelogFile="true"-->
+<!--                 splitStatements="true"-->
+<!--                 stripComments="true"/>-->
+<!--    </changeSet>-->
 </databaseChangeLog>
