@@ -54,40 +54,46 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/",
-//                        "/test",
-//                        "/test_question",
-//                        "/course",
-//                        "/task",
-//                        "/lesson",
-//                        "/test",
-//                        "/test_question",
-//                        "/user").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .permitAll()
-//                .and()
-//                .httpBasic();
+        //        http
+        //                .csrf().disable()
+        //                .authorizeRequests()
+        //                .antMatchers("/",
+        //                        "/test",
+        //                        "/test_question",
+        //                        "/course",
+        //                        "/task",
+        //                        "/lesson",
+        //                        "/test",
+        //                        "/test_question",
+        //                        "/user").permitAll()
+        //                .anyRequest().authenticated()
+        //                .and()
+        //                .formLogin()
+        //                .permitAll()
+        //                .and()
+        //                .logout()
+        //                .permitAll()
+        //                .and()
+        //                .httpBasic();
 
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/authenticate", "/swagger-ui.html").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
-//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/authenticate", "/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**")
+                .permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     private InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> inMemoryConfigurer() {
@@ -95,14 +101,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth, AuthenticationProvider provider) throws Exception {
-//        inMemoryConfigurer()
-//                .withUser("admin")
-//                .password("{noop}password")
-//                .authorities("ADMINISTRATOR")
-//                .and()
-//                .configure(auth);
-//        auth.authenticationProvider(provider);
+    protected void configureGlobal(AuthenticationManagerBuilder auth, AuthenticationProvider provider)
+            throws Exception {
+        //        inMemoryConfigurer()
+        //                .withUser("admin")
+        //                .password("{noop}password")
+        //                .authorities("ADMINISTRATOR")
+        //                .and()
+        //                .configure(auth);
+        //        auth.authenticationProvider(provider);
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }

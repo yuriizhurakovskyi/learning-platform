@@ -12,29 +12,11 @@
         <sqlFile dbms="postgresql"
                  encoding="utf8"
                  endDelimiter=";"
-                 path="changelog-v1-sql/create_tables.sql"
+                 path="changelog-v1-sql/learning_platform.sql"
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"/>
     </changeSet>
-    <changeSet author="Yurii" id="2">
-        <sqlFile dbms="postgresql"
-                 encoding="utf8"
-                 endDelimiter=";"
-                 path="changelog-v1-sql/fill_users.sql"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"/>
-    </changeSet>
-<!--    <changeSet author="Yurii" id="3">-->
-<!--        <sqlFile dbms="postgresql"-->
-<!--                 encoding="utf8"-->
-<!--                 endDelimiter=";"-->
-<!--                 path="changelog-v1-sql/fill_course.sql"-->
-<!--                 relativeToChangelogFile="true"-->
-<!--                 splitStatements="true"-->
-<!--                 stripComments="true"/>-->
-<!--    </changeSet>-->
 <!--    <changeSet author="Yurii" id="4">-->
 <!--        <sqlFile dbms="postgresql"-->
 <!--                 encoding="utf8"-->
