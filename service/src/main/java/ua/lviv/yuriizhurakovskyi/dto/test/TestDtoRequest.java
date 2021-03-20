@@ -9,6 +9,7 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 public class TestDtoRequest {
+
     private Long id;
 
     private String name;

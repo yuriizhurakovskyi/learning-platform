@@ -6,4 +6,5 @@ import ua.lviv.yuriizhurakovskyi.entity.Classwork;
 
 @Repository
 public interface ClassworkRepository extends JpaRepository<Classwork, Long> {
+
 }

@@ -8,7 +8,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface LessonService{
+public interface LessonService {
+
     LessonDtoResponse save(LessonDtoRequest lessonDtoRequest);
 
     LessonDtoResponse findById(Long lessonId);

@@ -9,6 +9,7 @@ import ua.lviv.yuriizhurakovskyi.entity.Test;
 @Component
 @AllArgsConstructor
 public class TestDtoResponseMapper {
+
     private final UserDtoResponseMapper userDtoResponseMapper;
 
     public TestDtoResponse map(Test test) {

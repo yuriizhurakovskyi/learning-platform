@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("/test_question")
 @RequiredArgsConstructor
 public class TestQuestionController {
+
     private final TestQuestionService testQuestionService;
 
     @PostMapping("/")
@@ -41,7 +42,8 @@ public class TestQuestionController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<TestQuestionDtoResponse> updateTestQuestion(@RequestBody TestQuestionDtoRequest testQuestionDtoRequest) {
+    public ResponseEntity<TestQuestionDtoResponse> updateTestQuestion(
+            @RequestBody TestQuestionDtoRequest testQuestionDtoRequest) {
         return ResponseEntity.ok(this.testQuestionService.update(testQuestionDtoRequest));
     }
 }

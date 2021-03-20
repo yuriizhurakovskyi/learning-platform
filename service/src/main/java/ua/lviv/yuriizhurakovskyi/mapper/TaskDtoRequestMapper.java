@@ -11,6 +11,7 @@ import ua.lviv.yuriizhurakovskyi.repository.LessonRepository;
 @Component
 @AllArgsConstructor
 public class TaskDtoRequestMapper {
+
     private final LessonRepository lessonRepository;
 
     public Task map(TaskDtoRequest taskDtoRequest) {

@@ -9,6 +9,7 @@ import ua.lviv.yuriizhurakovskyi.entity.Lesson;
 @Component
 @AllArgsConstructor
 public class LessonDtoResponseMapper {
+
     private final CourseDtoResponseMapper courseDtoResponseMapper;
 
     public LessonDtoResponse map(Lesson lesson) {

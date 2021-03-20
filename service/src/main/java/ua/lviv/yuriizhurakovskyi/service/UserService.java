@@ -10,6 +10,7 @@ import ua.lviv.yuriizhurakovskyi.entity.User;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
+
     UserDtoResponse save(UserDtoRequest userDtoRequest);
 
     UserDtoResponse findById(Long userId);

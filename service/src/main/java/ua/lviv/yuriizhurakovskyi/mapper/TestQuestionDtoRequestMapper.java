@@ -11,6 +11,7 @@ import ua.lviv.yuriizhurakovskyi.repository.TestRepository;
 @Component
 @AllArgsConstructor
 public class TestQuestionDtoRequestMapper {
+
     private final TestRepository testRepository;
 
     public TestQuestion map(TestQuestionDtoRequest testQuestionDtoRequest) {
