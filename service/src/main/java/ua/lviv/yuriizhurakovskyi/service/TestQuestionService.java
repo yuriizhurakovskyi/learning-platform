@@ -6,6 +6,7 @@ import ua.lviv.yuriizhurakovskyi.dto.test_question.TestQuestionDtoResponse;
 import java.util.List;
 
 public interface TestQuestionService {
+
     TestQuestionDtoResponse save(TestQuestionDtoRequest testQuestionDtoRequest);
 
     TestQuestionDtoResponse findById(Long testQuestionId);

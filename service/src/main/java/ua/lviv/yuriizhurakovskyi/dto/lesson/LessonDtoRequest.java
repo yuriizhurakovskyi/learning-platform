@@ -9,6 +9,7 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 public class LessonDtoRequest {
+
     private Long id;
 
     private String lectureTopic;

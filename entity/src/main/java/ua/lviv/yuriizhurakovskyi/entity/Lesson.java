@@ -14,14 +14,18 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 public class Lesson {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ls_id")
     private Long id;
+
     @Column(name = "ls_lecture_topic")
     private String lectureTopic;
+
     @Column(name = "ls_description")
     private String description;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ls_course_id")
     private Course course;

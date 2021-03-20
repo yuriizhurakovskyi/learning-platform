@@ -6,4 +6,5 @@ import ua.lviv.yuriizhurakovskyi.entity.Test;
 
 @Repository
 public interface TestRepository extends JpaRepository<Test, Long> {
+
 }

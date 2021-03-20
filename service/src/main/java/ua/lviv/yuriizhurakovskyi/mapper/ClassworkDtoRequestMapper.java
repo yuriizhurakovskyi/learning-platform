@@ -13,7 +13,9 @@ import ua.lviv.yuriizhurakovskyi.repository.UserRepository;
 @Component
 @AllArgsConstructor
 public class ClassworkDtoRequestMapper {
+
     private final TaskRepository taskRepository;
+
     private final UserRepository userRepository;
 
     public Classwork map(ClassworkDtoRequest classworkDtoRequest) {

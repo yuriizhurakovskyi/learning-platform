@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("/test")
 @RequiredArgsConstructor
 public class TestController {
+
     private final TestService testService;
 
     @PostMapping("/")

@@ -8,7 +8,9 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class JwtRequest{
+public class JwtRequest {
+
     private String username;
+
     private String password;
 }

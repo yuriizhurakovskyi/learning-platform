@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode
 public class ClassworkDtoRequest {
+
     private Long id;
 
     private LocalDateTime date;

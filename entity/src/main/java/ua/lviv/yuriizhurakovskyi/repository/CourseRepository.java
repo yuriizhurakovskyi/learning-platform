@@ -6,4 +6,5 @@ import ua.lviv.yuriizhurakovskyi.entity.Course;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
+
 }

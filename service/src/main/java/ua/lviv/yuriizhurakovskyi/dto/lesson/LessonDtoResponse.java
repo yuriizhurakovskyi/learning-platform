@@ -10,6 +10,7 @@ import ua.lviv.yuriizhurakovskyi.dto.course.CourseDtoResponse;
 @Setter
 @EqualsAndHashCode
 public class LessonDtoResponse {
+
     private Long id;
 
     private String lectureTopic;

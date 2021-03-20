@@ -14,12 +14,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 public class Test {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tst_id")
     private Long id;
+
     @Column(name = "tst_name")
     private String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tst_added_by")
     private User addedBy;

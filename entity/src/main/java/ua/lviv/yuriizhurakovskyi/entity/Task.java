@@ -14,12 +14,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tsk_id")
     private Long id;
+
     @Column(name = "tsk_description")
     private String description;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tsk_lesson_id")
     private Lesson lesson;
