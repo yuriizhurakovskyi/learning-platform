@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +25,7 @@ import ua.lviv.yuriizhurakovskyi.security.filter.JwtRequestFilter;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
+//@Profile("dev")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -39,6 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
@@ -46,39 +54,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //        http
-        //                .csrf().disable()
-        //                .authorizeRequests()
-        //                .antMatchers("/",
-        //                        "/test",
-        //                        "/test_question",
-        //                        "/course",
-        //                        "/task",
-        //                        "/lesson",
-        //                        "/test",
-        //                        "/test_question",
-        //                        "/user").permitAll()
-        //                .anyRequest().authenticated()
-        //                .and()
-        //                .formLogin()
-        //                .permitAll()
-        //                .and()
-        //                .logout()
-        //                .permitAll()
-        //                .and()
-        //                .httpBasic();
-
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/user")
+                .access("hasRole('ADMINISTRATOR') or  hasRole('TEACHER') or  hasRole('STUDENT')")
+                .antMatchers(HttpMethod.POST, "/user")
+                .access("hasRole('ADMINISTRATOR') or hasRole('TEACHER')")
+                .antMatchers(HttpMethod.GET, "/test")
+                .access("hasRole('ADMINISTRATOR') or  hasRole('TEACHER') or  hasRole('STUDENT') or hasRole('REGULAR_USER')")
+                .antMatchers(HttpMethod.POST, "/test")
+                .access("hasRole('ADMINISTRATOR') or hasRole('TEACHER')")
+                .antMatchers(HttpMethod.POST, "/test_question")
+                .access("hasRole('ADMINISTRATOR') or  hasRole('TEACHER') or  hasRole('STUDENT')")
+                .antMatchers("/task")
+                .access("hasRole('ADMINISTRATOR') or  hasRole('TEACHER') or  hasRole('STUDENT')")
+                .antMatchers("/classwork")
+                .access("hasRole('ADMINISTRATOR') or  hasRole('TEACHER') or  hasRole('STUDENT')")
+                .antMatchers("/course")
+                .access("hasRole('ADMINISTRATOR') or  hasRole('TEACHER') or  hasRole('STUDENT')")
+                .antMatchers("/lesson")
+                .access("hasRole('ADMINISTRATOR') or  hasRole('TEACHER') or  hasRole('STUDENT')")
                 .antMatchers("/authenticate", "/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",
@@ -96,20 +94,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-    private InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> inMemoryConfigurer() {
-        return new InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder>();
-    }
-
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth, AuthenticationProvider provider)
             throws Exception {
-        //        inMemoryConfigurer()
-        //                .withUser("admin")
-        //                .password("{noop}password")
-        //                .authorities("ADMINISTRATOR")
-        //                .and()
-        //                .configure(auth);
-        //        auth.authenticationProvider(provider);
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }
