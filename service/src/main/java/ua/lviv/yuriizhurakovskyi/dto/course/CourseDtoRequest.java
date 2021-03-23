@@ -10,6 +10,7 @@ import ua.lviv.yuriizhurakovskyi.entity.Level;
 @Setter
 @EqualsAndHashCode
 public class CourseDtoRequest {
+
     private Long id;
 
     private String name;

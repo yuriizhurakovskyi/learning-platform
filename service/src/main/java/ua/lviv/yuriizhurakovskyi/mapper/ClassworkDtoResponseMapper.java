@@ -10,7 +10,9 @@ import ua.lviv.yuriizhurakovskyi.entity.Classwork;
 @Component
 @AllArgsConstructor
 public class ClassworkDtoResponseMapper {
+
     private final TaskDtoResponseMapper taskDtoResponseMapper;
+
     private final UserDtoResponseMapper userDtoResponseMapper;
 
     public ClassworkDtoResponse map(Classwork classwork) {

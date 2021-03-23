@@ -11,6 +11,7 @@ import ua.lviv.yuriizhurakovskyi.repository.UserRepository;
 @Component
 @AllArgsConstructor
 public class CourseDtoRequestMapper {
+
     private final UserRepository userRepository;
 
     public Course map(CourseDtoRequest courseDtoRequest) {

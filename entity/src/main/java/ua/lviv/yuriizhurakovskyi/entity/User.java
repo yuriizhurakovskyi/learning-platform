@@ -21,29 +21,41 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class User implements UserDetails {
+
     @Id
     @Column(name = "u_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "u_firstname")
     private String firstName;
+
     @Column(name = "u_lastname")
     private String lastName;
+
     @Column(name = "u_level")
     @Enumerated(EnumType.STRING)
     private Level level;
+
     @Column(name = "u_date_of_birth")
     private LocalDateTime dateOfBirth;
+
     @Column(name = "u_role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
     @Column(name = "u_email")
     private String email;
+
     @Column(name = "u_password")
     private String password;
+
     private boolean enabled = true;
+
     private boolean credentialsNonExpired = true;
+
     private boolean accountNonLocked = true;
+
     private boolean accountNonExpired = true;
 
     @Override

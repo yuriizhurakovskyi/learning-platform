@@ -9,6 +9,7 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 public class TaskDtoRequest {
+
     private Long id;
 
     private String description;

@@ -9,6 +9,7 @@ import ua.lviv.yuriizhurakovskyi.entity.Task;
 @Component
 @AllArgsConstructor
 public class TaskDtoResponseMapper {
+
     private final LessonDtoResponseMapper lessonDtoResponseMapper;
 
     public TaskDtoResponse map(Task task) {

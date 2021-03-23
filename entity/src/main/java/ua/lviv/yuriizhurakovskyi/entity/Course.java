@@ -15,18 +15,23 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Course {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cs_id")
     private Long id;
+
     @Column(name = "cs_name")
     private String name;
+
     @Column(name = "cs_level")
     @Enumerated(EnumType.STRING)
     private Level level;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cs_added_by")
     private User addedBy;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
     private List<Lesson> lessons;
 }

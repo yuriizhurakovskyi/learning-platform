@@ -11,6 +11,7 @@ import ua.lviv.yuriizhurakovskyi.entity.Level;
 @Setter
 @EqualsAndHashCode
 public class CourseDtoResponse {
+
     private Long id;
 
     private String name;

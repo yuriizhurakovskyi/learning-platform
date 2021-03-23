@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("/lesson")
 @RequiredArgsConstructor
 public class LessonController {
+
     private final LessonService lessonService;
 
     @PostMapping("/")

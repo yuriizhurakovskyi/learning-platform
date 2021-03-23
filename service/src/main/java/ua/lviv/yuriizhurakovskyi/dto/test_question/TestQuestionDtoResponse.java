@@ -10,6 +10,7 @@ import ua.lviv.yuriizhurakovskyi.dto.test.TestDtoResponse;
 @Setter
 @EqualsAndHashCode
 public class TestQuestionDtoResponse {
+
     private Long id;
 
     private String question;
